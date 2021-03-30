@@ -22,6 +22,6 @@ public final class LocationSelector {
 
     public Location getRandomLocation() {
         final Random randomNumber = new Random(6);
-        return locations.get(randomNumber.nextInt());
+        return locations.get(randomNumber.nextInt(5));
     }
 }
