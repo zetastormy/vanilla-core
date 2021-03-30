@@ -3,3 +3,4 @@ name: VanillaCore
 version: ${project.version}
 description: Zafire Network core for Survival Vanilla.
 author: ZafireStudios
+depend: [PlaceholderAPI]
