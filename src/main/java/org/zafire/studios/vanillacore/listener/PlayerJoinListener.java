@@ -34,9 +34,10 @@ public final class PlayerJoinListener implements Listener {
 
         if (!player.hasPlayedBefore()) {
             if (!player.hasPermission("sulphur.donator")) {
-                final TextComponent newPlayerMessage = Component
-                        .text(messageParser.parse("&5&lZafire &8|| &7El usuario &6" + player.getName()
-                                + " &7ha entrado por primera vez al servidor &8(&6#%server_unique_joins%&8)&7."));
+                final TextComponent newPlayerMessage = Component.text(messageParser.parse(
+                        "&5&lZafire &8|| &7El usuario &6" + player.getName()
+                                + " &7ha entrado por primera vez al servidor &8(&6#%server_unique_joins%&8)&7.",
+                        player));
                 event.joinMessage(newPlayerMessage);
             }
 
@@ -46,8 +47,8 @@ public final class PlayerJoinListener implements Listener {
         }
 
         if (player.hasPermission("sulphur.donator") && player.hasPlayedBefore()) {
-            final TextComponent donatorMessage = Component.text(messageParser
-                    .parse("&5&lZafire &8|| &7El usuario &6" + player.getName() + " &7ha entrado al servidor."));
+            final TextComponent donatorMessage = Component.text(messageParser.parse(
+                    "&5&lZafire &8|| &7El usuario &6" + player.getName() + " &7ha entrado al servidor.", player));
             event.joinMessage(donatorMessage);
         }
     }
