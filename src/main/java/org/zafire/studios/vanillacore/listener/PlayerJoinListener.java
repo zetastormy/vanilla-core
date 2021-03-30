@@ -15,7 +15,7 @@ import net.kyori.adventure.text.TextComponent;
 public final class PlayerJoinListener implements Listener {
     private final VanillaCorePlugin plugin;
     private LocationSelector locationSelector;
-    private MessageParser messageParser;
+    private final MessageParser messageParser;
 
     public PlayerJoinListener(final VanillaCorePlugin plugin) {
         this.plugin = plugin;
@@ -34,7 +34,7 @@ public final class PlayerJoinListener implements Listener {
 
         if (!player.hasPlayedBefore()) {
             if (!player.hasPermission("sulphur.donator")) {
-                String newPlayerString = messageParser.parse(
+                final String newPlayerString = messageParser.parse(
                         "&5&lZafire &8|| &7El usuario &6" + player.getName()
                                 + " &7ha entrado por primera vez al servidor &8(&6#%server_unique_joins%&8)&7.",
                         player);
@@ -43,12 +43,12 @@ public final class PlayerJoinListener implements Listener {
             }
 
             locationSelector = plugin.getLocationSelector();
-            Location location = locationSelector.getRandomLocation();
+            final Location location = locationSelector.getRandomLocation();
             player.teleportAsync(location);
         }
 
         if (player.hasPermission("sulphur.donator") && player.hasPlayedBefore()) {
-            String donatorPlayerString = messageParser
+            final String donatorPlayerString = messageParser
                     .parse("&5&lZafire &8|| &7El usuario &6" + player.getName() + " &7ha entrado al servidor.", player);
             final TextComponent donatorPlayerComponent = Component.text(donatorPlayerString);
             event.joinMessage(donatorPlayerComponent);
