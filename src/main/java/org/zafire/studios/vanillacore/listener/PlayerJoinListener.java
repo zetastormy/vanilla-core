@@ -1,6 +1,5 @@
 package org.zafire.studios.vanillacore.listener;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -39,8 +38,6 @@ public final class PlayerJoinListener implements Listener {
                         "&5&lZafire &8|| &7El usuario &6" + player.getName()
                                 + " &7ha entrado por primera vez al servidor &8(&6#%server_unique_joins%&8)&7.",
                         player);
-
-                Bukkit.getLogger().warning("New player string: " + newPlayerString);
                 
                 final TextComponent newPlayerComponent = Component.text(newPlayerString);
                 event.joinMessage(newPlayerComponent);
