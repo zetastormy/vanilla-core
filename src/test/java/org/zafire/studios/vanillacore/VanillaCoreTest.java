@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 import org.zafire.studios.vanillacore.util.LocationSelector;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
@@ -11,6 +12,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 
+@Disabled("MockBukkit doesn't support Paper API")
 public class VanillaCoreTest {
     private ServerMock server;
     private VanillaCorePlugin plugin;
