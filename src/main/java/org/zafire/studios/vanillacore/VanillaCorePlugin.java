@@ -10,12 +10,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.zafire.studios.vanillacore.listener.PlayerJoinListener;
 import org.zafire.studios.vanillacore.util.LocationSelector;
+import org.zafire.studios.vanillacore.util.MessageSender;
 
 public final class VanillaCorePlugin extends JavaPlugin {
     private Logger logger;
     private Server server;
     private PluginManager pluginManager;
     private LocationSelector locationSelector;
+    private MessageSender messageSender;
 
     public VanillaCorePlugin() {
         super();
@@ -36,6 +38,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
         server = getServer();
         pluginManager = server.getPluginManager();
         locationSelector = new LocationSelector(server);
+        messageSender = new MessageSender();
         logger.info("Object instances has been set!");
     }
 
@@ -46,5 +49,9 @@ public final class VanillaCorePlugin extends JavaPlugin {
 
     public LocationSelector getLocationSelector() {
         return locationSelector;
+    }
+    
+    public MessageSender getMessageSender() {
+        return messageSender;
     }
 }
