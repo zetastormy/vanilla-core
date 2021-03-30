@@ -4,3 +4,9 @@ version: ${project.version}
 description: Zafire Network core for Survival Vanilla.
 author: ZafireStudios
 depend: [PlaceholderAPI]
+
+commands:
+  Lobby:
+    usage: /<command>
+    aliases: [hub]
+    description: Travel to the lobby server of ZafireNT.

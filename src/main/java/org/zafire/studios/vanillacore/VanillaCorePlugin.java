@@ -8,9 +8,11 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
+import org.zafire.studios.vanillacore.command.LobbyCommand;
 import org.zafire.studios.vanillacore.listener.PlayerJoinListener;
 import org.zafire.studios.vanillacore.util.LocationSelector;
 import org.zafire.studios.vanillacore.util.MessageParser;
+import org.zafire.studios.vanillacore.util.PlayerCache;
 
 public final class VanillaCorePlugin extends JavaPlugin {
     private Logger logger;
@@ -18,6 +20,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
     private PluginManager pluginManager;
     private LocationSelector locationSelector;
     private MessageParser messageParser;
+    private PlayerCache playerCache;
 
     public VanillaCorePlugin() {
         super();
@@ -32,6 +35,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
     public void onEnable() {
         setInstances();
         registerListeners();
+        registerCommands();
     }
 
     private void setInstances() {
@@ -40,6 +44,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
         pluginManager = server.getPluginManager();
         locationSelector = new LocationSelector(server);
         messageParser = new MessageParser();
+        playerCache = new PlayerCache();
         logger.info("Object instances has been set!");
     }
 
@@ -48,11 +53,20 @@ public final class VanillaCorePlugin extends JavaPlugin {
         logger.info("The listeners has been registered!");
     }
 
+    private void registerCommands() {
+        getCommand("lobby").setExecutor(new LobbyCommand(this));
+        logger.info("The command executors has been set!");
+    }
+
     public LocationSelector getLocationSelector() {
         return locationSelector;
     }
 
     public MessageParser getMessageParser() {
         return messageParser;
+    }
+
+    public PlayerCache getPlayerCache() {
+        return playerCache;
     }
 }
