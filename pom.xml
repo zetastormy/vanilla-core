@@ -7,8 +7,8 @@
   <version>0.1.0</version>
 
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -31,6 +31,12 @@
       <artifactId>spigot-api</artifactId>
       <version>1.16.5-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.seeseemelk</groupId>
+      <artifactId>MockBukkit-v1.16</artifactId>
+      <version>0.25.0</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -57,5 +63,4 @@
       </resource>
     </resources>
   </build>
-
 </project>
