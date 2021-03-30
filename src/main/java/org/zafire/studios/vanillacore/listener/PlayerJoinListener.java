@@ -34,11 +34,12 @@ public final class PlayerJoinListener implements Listener {
 
         if (!player.hasPlayedBefore()) {
             if (!player.hasPermission("sulphur.donator")) {
-                final TextComponent newPlayerMessage = Component.text(messageParser.parse(
+                String newPlayerString = messageParser.parse(
                         "&5&lZafire &8|| &7El usuario &6" + player.getName()
                                 + " &7ha entrado por primera vez al servidor &8(&6#%server_unique_joins%&8)&7.",
-                        player));
-                event.joinMessage(newPlayerMessage);
+                        player);
+                final TextComponent newPlayerComponent = Component.text(newPlayerString);
+                event.joinMessage(newPlayerComponent);
             }
 
             locationSelector = plugin.getLocationSelector();
@@ -47,9 +48,10 @@ public final class PlayerJoinListener implements Listener {
         }
 
         if (player.hasPermission("sulphur.donator") && player.hasPlayedBefore()) {
-            final TextComponent donatorMessage = Component.text(messageParser.parse(
-                    "&5&lZafire &8|| &7El usuario &6" + player.getName() + " &7ha entrado al servidor.", player));
-            event.joinMessage(donatorMessage);
+            String donatorPlayerString = messageParser
+                    .parse("&5&lZafire &8|| &7El usuario &6" + player.getName() + " &7ha entrado al servidor.", player);
+            final TextComponent donatorPlayerComponent = Component.text(donatorPlayerString);
+            event.joinMessage(donatorPlayerComponent);
         }
     }
 }

@@ -9,7 +9,11 @@ public final class MessageParser {
     
     public String parse(final String string, final Player player) {
         String stringReplacement;
-        stringReplacement = PlaceholderAPI.setPlaceholders(player, string);
+
+        if (PlaceholderAPI.containsPlaceholders(string)) {
+            stringReplacement = PlaceholderAPI.setPlaceholders(player, string);
+        }
+        
         stringReplacement = replaceColors(string);
 
         return stringReplacement;
