@@ -1,10 +1,10 @@
 package org.zafire.studios.vanillacore;
 
 import org.bukkit.Location;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.zafire.studios.vanillacore.util.LocationSelector;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
@@ -19,7 +19,7 @@ public class VanillaCoreTest {
     private PlayerMock player;
     private WorldMock world;
 
-    @Before
+    @BeforeAll
     public void setUp() {
         server = MockBukkit.mock();
         plugin = (VanillaCorePlugin) MockBukkit.load(VanillaCorePlugin.class);
@@ -36,7 +36,7 @@ public class VanillaCoreTest {
         player.assertLocation(location, 10);
     }
 
-    @After
+    @AfterAll
     public void tearDown() {
         MockBukkit.unmock();
     }
