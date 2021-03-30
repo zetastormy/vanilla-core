@@ -1,5 +1,6 @@
 package org.zafire.studios.vanillacore.util;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -11,7 +12,11 @@ public final class MessageParser {
         String stringReplacement;
 
         if (PlaceholderAPI.containsPlaceholders(string)) {
+            Bukkit.getLogger().warning("Placeholders detected!");
+
             stringReplacement = PlaceholderAPI.setPlaceholders(player, string);
+            
+            Bukkit.getLogger().warning("String with placeholders: " + stringReplacement);
         }
         
         stringReplacement = replaceColors(string);
