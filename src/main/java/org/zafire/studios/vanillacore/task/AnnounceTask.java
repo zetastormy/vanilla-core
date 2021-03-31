@@ -9,6 +9,8 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.VanillaCorePlugin;
 import org.zafire.studios.vanillacore.util.MessageParser;
 
+import net.kyori.adventure.text.TextComponent;
+
 public class AnnounceTask {
     private final VanillaCorePlugin plugin;
     private final Server server;
@@ -52,10 +54,12 @@ public class AnnounceTask {
         }, 3000L, 6000L);
     }
 
-    private void announce(final String message) {
+    private void announce(final String rawMessage) {
         for (Player player : plugin.getServer().getOnlinePlayers()) {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 2, 0);
-            messageParser.parse(message, player);
+            
+            final TextComponent announceMessage = messageParser.parse(rawMessage, player);
+            player.sendMessage(announceMessage);
         }
     }
 }
