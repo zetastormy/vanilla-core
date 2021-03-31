@@ -3,7 +3,6 @@ package org.zafire.studios.vanillacore.task;
 import java.util.Random;
 
 import org.bukkit.Server;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.VanillaCorePlugin;
 import org.zafire.studios.vanillacore.util.MessageParser;
