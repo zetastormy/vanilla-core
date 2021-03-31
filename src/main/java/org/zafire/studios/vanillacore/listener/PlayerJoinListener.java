@@ -24,12 +24,7 @@ public final class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPlayerJoin(final PlayerJoinEvent event) {
         final Player player = event.getPlayer();
-
-        if (player == null || (player.hasPlayedBefore() && !(player.hasPermission("sulphur.donator")))
-                || player.hasPermission("sulphur.staff")) {
-            event.joinMessage(null);
-            return;
-        }
+        event.joinMessage(null);
 
         if (!player.hasPlayedBefore()) {
             if (!player.hasPermission("sulphur.donator")) {
