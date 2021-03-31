@@ -16,7 +16,6 @@ import org.zafire.studios.vanillacore.VanillaCorePlugin;
 import org.zafire.studios.vanillacore.util.MessageParser;
 import org.zafire.studios.vanillacore.util.PlayerCache;
 
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 
 public final class LobbyCommand implements CommandExecutor {
@@ -54,10 +53,9 @@ public final class LobbyCommand implements CommandExecutor {
 
             player.saveData();
 
-            final String successString = messageParser
+            final TextComponent success = messageParser
                     .parse("&5&lZafire &8|| &7Teletransportándote al &6Lobby&7, por favor, espera.", player);
-            final TextComponent successComponent = Component.text(successString);
-            player.sendMessage(successComponent);
+            player.sendMessage(success);
 
             final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             final DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);

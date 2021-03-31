@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.zafire.studios.vanillacore.command.LobbyCommand;
 import org.zafire.studios.vanillacore.listener.PlayerJoinListener;
+import org.zafire.studios.vanillacore.task.AnnounceTask;
 import org.zafire.studios.vanillacore.util.LocationSelector;
 import org.zafire.studios.vanillacore.util.MessageParser;
 import org.zafire.studios.vanillacore.util.PlayerCache;
@@ -36,6 +37,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
         setInstances();
         registerListeners();
         registerCommands();
+        scheduleTasks();
     }
 
     private void setInstances() {
@@ -45,17 +47,22 @@ public final class VanillaCorePlugin extends JavaPlugin {
         locationSelector = new LocationSelector(server);
         messageParser = new MessageParser();
         playerCache = new PlayerCache();
-        logger.info("Object instances has been set!");
+        logger.info("The object instances have been set!");
     }
 
     private void registerListeners() {
         pluginManager.registerEvents(new PlayerJoinListener(this), this);
-        logger.info("The listeners has been registered!");
+        logger.info("The listeners have been registered!");
     }
 
     private void registerCommands() {
         getCommand("lobby").setExecutor(new LobbyCommand(this));
-        logger.info("The command executors has been set!");
+        logger.info("The command executors have been set!");
+    }
+
+    private void scheduleTasks() {
+        new AnnounceTask(this);
+        logger.info("The tasks have been scheduled!");
     }
 
     public LocationSelector getLocationSelector() {

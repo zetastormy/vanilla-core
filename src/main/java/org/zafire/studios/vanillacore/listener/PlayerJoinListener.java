@@ -9,7 +9,6 @@ import org.zafire.studios.vanillacore.VanillaCorePlugin;
 import org.zafire.studios.vanillacore.util.LocationSelector;
 import org.zafire.studios.vanillacore.util.MessageParser;
 
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 
 public final class PlayerJoinListener implements Listener {
@@ -34,13 +33,12 @@ public final class PlayerJoinListener implements Listener {
 
         if (!player.hasPlayedBefore()) {
             if (!player.hasPermission("sulphur.donator")) {
-                final String newPlayerString = messageParser.parse(
+                final TextComponent newPlayer = messageParser.parse(
                         "&5&lZafire &8|| &7El usuario &6" + player.getName()
                                 + " &7ha entrado por primera vez al servidor &8(&6#%server_unique_joins%&8)&7.",
                         player);
-                
-                final TextComponent newPlayerComponent = Component.text(newPlayerString);
-                event.joinMessage(newPlayerComponent);
+
+                event.joinMessage(newPlayer);
             }
 
             locationSelector = plugin.getLocationSelector();
@@ -49,10 +47,9 @@ public final class PlayerJoinListener implements Listener {
         }
 
         if (player.hasPermission("sulphur.donator") && player.hasPlayedBefore()) {
-            final String donatorPlayerString = messageParser
+            final TextComponent donatorPlayer = messageParser
                     .parse("&5&lZafire &8|| &7El usuario &6" + player.getName() + " &7ha entrado al servidor.", player);
-            final TextComponent donatorPlayerComponent = Component.text(donatorPlayerString);
-            event.joinMessage(donatorPlayerComponent);
+            event.joinMessage(donatorPlayer);
         }
     }
 }
