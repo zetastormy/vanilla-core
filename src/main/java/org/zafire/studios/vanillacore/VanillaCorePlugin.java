@@ -8,6 +8,8 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
+import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.command.LobbyCommand;
 import org.zafire.studios.vanillacore.listener.PlayerJoinListener;
 import org.zafire.studios.vanillacore.task.AnnounceTask;
@@ -22,6 +24,8 @@ public final class VanillaCorePlugin extends JavaPlugin {
     private LocationSelector locationSelector;
     private MessageParser messageParser;
     private PlayerCache playerCache;
+    private BukkitScheduler bukkitScheduler;
+    private Messenger messenger;
 
     public VanillaCorePlugin() {
         super();
@@ -36,8 +40,14 @@ public final class VanillaCorePlugin extends JavaPlugin {
     public void onEnable() {
         setInstances();
         registerListeners();
+        registerChannels();
         registerCommands();
         scheduleTasks();
+    }
+
+    @Override
+    public void onDisable() {
+        bukkitScheduler.cancelTasks(this);
     }
 
     private void setInstances() {
@@ -47,6 +57,8 @@ public final class VanillaCorePlugin extends JavaPlugin {
         locationSelector = new LocationSelector(server);
         messageParser = new MessageParser();
         playerCache = new PlayerCache();
+        bukkitScheduler = server.getScheduler();
+        messenger = server.getMessenger();
         logger.info("The object instances have been set!");
     }
 
@@ -63,6 +75,11 @@ public final class VanillaCorePlugin extends JavaPlugin {
     private void scheduleTasks() {
         new AnnounceTask(this);
         logger.info("The tasks have been scheduled!");
+    }
+
+    private void registerChannels() {
+        messenger.registerOutgoingPluginChannel(this, "BungeeCord");
+        logger.info("The channels have been registered!");
     }
 
     public LocationSelector getLocationSelector() {
