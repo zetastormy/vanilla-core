@@ -8,13 +8,17 @@ import net.kyori.adventure.text.TextComponent;
 
 public final class MessageParser {
 
-    public TextComponent parse(final String string, final Player player) {
-        final String message = sanitize(string, player);
+    public TextComponent parse(final String rawMessage, final Player player) {
+        final String message = sanitize(rawMessage, player);
         return Component.text(message);
     }
 
-    private String sanitize(final String string, final Player player) {
-        return PlaceholderAPI.setPlaceholders(player, string);
+    public TextComponent parse(final String rawMessage) {
+        return Component.text(rawMessage);
+    }
+
+    private String sanitize(final String rawMessage, final Player player) {
+        return PlaceholderAPI.setPlaceholders(player, rawMessage);
     }
 
 }

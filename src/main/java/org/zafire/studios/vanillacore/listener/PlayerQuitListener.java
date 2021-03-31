@@ -28,6 +28,5 @@ public final class PlayerQuitListener implements Listener {
         if (playerCache.isCached(playerUuid)) {
             playerCache.remove(playerUuid);
         }
-        
     }
 }

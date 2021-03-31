@@ -3,12 +3,13 @@ package org.zafire.studios.vanillacore.task;
 import java.util.Random;
 
 import org.bukkit.Server;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.VanillaCorePlugin;
 import org.zafire.studios.vanillacore.util.MessageParser;
 
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.TextComponent;
 
 public class AnnounceTask {
@@ -30,7 +31,7 @@ public class AnnounceTask {
             @Override
             public void run() {
                 final Random random = new Random();
-                int randomNumber = random.nextInt(4);
+                final int randomNumber = random.nextInt(4);
 
                 switch (randomNumber) {
                 case 0:
@@ -55,11 +56,10 @@ public class AnnounceTask {
     }
 
     private void announce(final String rawMessage) {
-        for (Player player : plugin.getServer().getOnlinePlayers()) {
-            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 2, 0);
-            
-            final TextComponent announceMessage = messageParser.parse(rawMessage, player);
-            player.sendMessage(announceMessage);
-        }
+        final Sound sound = Sound.sound(Key.key("BLOCK_NOTE_BLOCK_PLING"), Sound.Source.AMBIENT, 2, 0);
+        server.playSound(sound);
+
+        final TextComponent announceMessage = messageParser.parse(rawMessage);
+        server.sendMessage(announceMessage);
     }
 }
