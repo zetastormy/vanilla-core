@@ -1,6 +1,7 @@
 main: org.zafire.studios.vanillacore.VanillaCorePlugin
 name: VanillaCore
 version: ${project.version}
+api-version: 1.16
 description: Zafire Network core for Survival Vanilla.
 author: ZafireStudios
 depend: [PlaceholderAPI]
