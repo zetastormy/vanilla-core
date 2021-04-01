@@ -26,30 +26,27 @@ public class AnnounceTask {
     }
 
     public void schedule() {
-        bukkitScheduler.runTaskTimerAsynchronously(plugin, new Runnable() {
-            @Override
-            public void run() {
-                final Random random = new Random();
-                final int randomNumber = random.nextInt(4);
+        bukkitScheduler.runTaskTimerAsynchronously(plugin, () -> {
+            final Random random = new Random();
+            final int randomNumber = random.nextInt(4);
 
-                switch (randomNumber) {
-                case 0:
-                    announce("&6&lAnuncio &8|| &7Recuerda apoyarnos en la tienda del servidor&8: &6store.zafire.org");
-                    break;
-                case 1:
-                    announce("&6&lAnuncio &8|| &7No te olvides de seguirnos en Twitter&8: &6twitter.com/ZafireNT/");
-                    break;
-                case 2:
-                    announce("&6&lAnuncio &8|| &7Únete a nuestra comunidad de Discord&8: &6discord.zafire.org");
-                    break;
-                case 3:
-                    announce("&6&lConsejo &8|| &7Recuerda leerlas nuestras normas y respetarlas&8: &6rules.zafire.org");
-                    break;
-                default:
-                    announce(
-                            "&6&lAnuncio &8|| &7¡Comparte el servidor con tus conocidos para que la comunidad siga creciendo!");
-                    break;
-                }
+            switch (randomNumber) {
+            case 0:
+                announce("&6&lAnuncio &8|| &7Recuerda apoyarnos en la tienda del servidor&8: &6store.zafire.org");
+                break;
+            case 1:
+                announce("&6&lAnuncio &8|| &7No te olvides de seguirnos en Twitter&8: &6twitter.com/ZafireNT/");
+                break;
+            case 2:
+                announce("&6&lAnuncio &8|| &7Únete a nuestra comunidad de Discord&8: &6discord.zafire.org");
+                break;
+            case 3:
+                announce("&6&lConsejo &8|| &7Recuerda leerlas nuestras normas y respetarlas&8: &6rules.zafire.org");
+                break;
+            default:
+                announce(
+                        "&6&lAnuncio &8|| &7¡Comparte el servidor con tus conocidos para que la comunidad siga creciendo!");
+                break;
             }
         }, 3000L, 6000L);
     }

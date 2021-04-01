@@ -12,8 +12,8 @@ import org.zafire.studios.vanillacore.util.MessageParser;
 import net.kyori.adventure.text.TextComponent;
 
 public final class PlayerJoinListener implements Listener {
+
     private final VanillaCorePlugin plugin;
-    private LocationSelector locationSelector;
     private final MessageParser messageParser;
 
     public PlayerJoinListener(final VanillaCorePlugin plugin) {
@@ -36,7 +36,7 @@ public final class PlayerJoinListener implements Listener {
                 event.joinMessage(newPlayer);
             }
 
-            locationSelector = plugin.getLocationSelector();
+            LocationSelector locationSelector = plugin.getLocationSelector();
             final Location location = locationSelector.getRandomLocation();
             player.teleportAsync(location);
         }
