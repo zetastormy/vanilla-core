@@ -35,7 +35,7 @@ public final class CoordinatesTask {
             Location playerLocation = player.getLocation();
 
             String coordinates = createCoordinates(playerLocation).toString();
-            TextComponent coordinatesMessage = messageParser.parse("&6" + coordinates);
+            TextComponent coordinatesMessage = messageParser.parse("&8» &a" + coordinates + " &8«");
 
             player.sendActionBar(coordinatesMessage);
         }
@@ -48,7 +48,29 @@ public final class CoordinatesTask {
         coordinates.append((int) playerLocation.getY());
         coordinates.append(' ');
         coordinates.append((int) playerLocation.getZ());
+        coordinates.append(' ');
+        coordinates.append(getDirection(playerLocation));
 
         return coordinates;
+    }
+
+
+    private String getDirection(final Location playerLocation) {
+        double rotation = playerLocation.getYaw();
+        if (rotation < 0.0D) {
+            rotation += 360.0D;
+        }
+
+        if (Math.abs(rotation) <= 45 || Math.abs(rotation - 360) <= 45) {
+            return "+Z";
+        } else if (Math.abs(rotation - 90) <= 45) {
+            return "-X";
+        } else if (Math.abs(rotation - 180) <= 45) {
+            return "-Z";
+        } else if (Math.abs(rotation - 270) <= 45) {
+            return "+X";
+        }
+
+        return "";
     }
 }
