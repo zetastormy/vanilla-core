@@ -12,6 +12,7 @@ import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.command.LobbyCommand;
 import org.zafire.studios.vanillacore.listener.InventoryClickListener;
+import org.zafire.studios.vanillacore.listener.PlayerDeathListener;
 import org.zafire.studios.vanillacore.listener.PlayerDropItemListener;
 import org.zafire.studios.vanillacore.listener.PlayerInteractListener;
 import org.zafire.studios.vanillacore.listener.PlayerJoinListener;
@@ -19,6 +20,7 @@ import org.zafire.studios.vanillacore.listener.PlayerQuitListener;
 import org.zafire.studios.vanillacore.listener.PlayerRespawnListener;
 import org.zafire.studios.vanillacore.task.AnnounceTask;
 import org.zafire.studios.vanillacore.task.CoordinatesTask;
+import org.zafire.studios.vanillacore.util.DeathCache;
 import org.zafire.studios.vanillacore.util.LocationSelector;
 import org.zafire.studios.vanillacore.util.MessageParser;
 import org.zafire.studios.vanillacore.util.PlayerCache;
@@ -31,6 +33,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
     private LocationSelector locationSelector;
     private MessageParser messageParser;
     private PlayerCache playerCache;
+    private DeathCache deathCache;
     private BukkitScheduler bukkitScheduler;
     private Messenger messenger;
 
@@ -64,6 +67,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
         locationSelector = new LocationSelector(server);
         messageParser = new MessageParser();
         playerCache = new PlayerCache();
+        deathCache = new DeathCache();
         bukkitScheduler = server.getScheduler();
         messenger = server.getMessenger();
         logger.info("The object instances have been set!");
@@ -71,6 +75,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
 
     private void registerListeners() {
         pluginManager.registerEvents(new InventoryClickListener(playerCache), this);
+        pluginManager.registerEvents(new PlayerDeathListener(this), this);
         pluginManager.registerEvents(new PlayerDropItemListener(playerCache), this);
         pluginManager.registerEvents(new PlayerInteractListener(playerCache), this);
         pluginManager.registerEvents(new PlayerJoinListener(this), this);
@@ -105,5 +110,9 @@ public final class VanillaCorePlugin extends JavaPlugin {
 
     public PlayerCache getPlayerCache() {
         return playerCache;
+    }
+
+    public DeathCache getDeathCache() {
+        return deathCache;
     }
 }

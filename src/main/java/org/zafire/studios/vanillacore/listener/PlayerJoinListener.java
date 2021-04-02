@@ -44,6 +44,7 @@ public final class PlayerJoinListener implements Listener {
         if (player.hasPermission("sulphur.donator") && player.hasPlayedBefore()) {
             final TextComponent donatorPlayer = messageParser
                     .parse("&5&lZafire &8|| &7El usuario &6" + player.getName() + " &7ha entrado al servidor.", player);
+                    
             event.joinMessage(donatorPlayer);
         }
     }
