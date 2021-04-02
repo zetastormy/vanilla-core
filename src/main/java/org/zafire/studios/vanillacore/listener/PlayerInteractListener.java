@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.zafire.studios.vanillacore.util.PlayerCache;
 
 public final class PlayerInteractListener implements Listener {
+
     private final PlayerCache playerCache;
 
     public PlayerInteractListener(final PlayerCache playerCache) {

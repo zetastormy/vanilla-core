@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.zafire.studios.vanillacore.util.PlayerCache;
 
 public final class PlayerQuitListener implements Listener {
+
     private final PlayerCache playerCache;
 
     public PlayerQuitListener(final PlayerCache playerCache) {

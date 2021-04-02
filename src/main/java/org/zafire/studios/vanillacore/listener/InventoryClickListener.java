@@ -9,6 +9,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.zafire.studios.vanillacore.util.PlayerCache;
 
 public final class InventoryClickListener implements Listener {
+
     private final PlayerCache playerCache;
 
     public InventoryClickListener(final PlayerCache playerCache) {

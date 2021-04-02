@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.zafire.studios.vanillacore.util.PlayerCache;
 
 public final class PlayerDropItemListener implements Listener {
+
     private final PlayerCache playerCache;
 
     public PlayerDropItemListener(final PlayerCache playerCache) {

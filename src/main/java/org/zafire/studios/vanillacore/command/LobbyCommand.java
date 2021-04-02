@@ -19,8 +19,8 @@ import org.zafire.studios.vanillacore.util.PlayerCache;
 import net.kyori.adventure.text.TextComponent;
 
 public final class LobbyCommand implements CommandExecutor {
+
     private final VanillaCorePlugin plugin;
-    private final Server server;
     private final Logger logger;
     private final PlayerCache playerCache;
     private final MessageParser messageParser;
@@ -28,7 +28,7 @@ public final class LobbyCommand implements CommandExecutor {
 
     public LobbyCommand(final VanillaCorePlugin plugin) {
         this.plugin = plugin;
-        server = plugin.getServer();
+        Server server = plugin.getServer();
         logger = plugin.getLogger();
         playerCache = plugin.getPlayerCache();
         messageParser = plugin.getMessageParser();
@@ -43,13 +43,9 @@ public final class LobbyCommand implements CommandExecutor {
             final UUID playerUuid = player.getUniqueId();
             playerCache.add(playerUuid);
 
-            bukkitScheduler.runTaskLater(plugin, new Runnable() {
-                @Override
-                public void run() {
-                    playerCache.remove(playerUuid);
-                }
-
-            }, 4000L);
+            bukkitScheduler.runTaskLater(plugin,
+                    () -> playerCache.remove(playerUuid),
+                    4000L);
 
             player.saveData();
 

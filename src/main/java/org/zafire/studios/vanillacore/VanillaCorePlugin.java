@@ -18,6 +18,7 @@ import org.zafire.studios.vanillacore.util.MessageParser;
 import org.zafire.studios.vanillacore.util.PlayerCache;
 
 public final class VanillaCorePlugin extends JavaPlugin {
+
     private Logger logger;
     private Server server;
     private PluginManager pluginManager;
