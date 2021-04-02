@@ -11,7 +11,12 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.command.LobbyCommand;
+import org.zafire.studios.vanillacore.listener.InventoryClickListener;
+import org.zafire.studios.vanillacore.listener.PlayerDropItemListener;
+import org.zafire.studios.vanillacore.listener.PlayerInteractListener;
 import org.zafire.studios.vanillacore.listener.PlayerJoinListener;
+import org.zafire.studios.vanillacore.listener.PlayerQuitListener;
+import org.zafire.studios.vanillacore.listener.PlayerRespawnListener;
 import org.zafire.studios.vanillacore.task.AnnounceTask;
 import org.zafire.studios.vanillacore.task.CoordinatesTask;
 import org.zafire.studios.vanillacore.util.LocationSelector;
@@ -65,7 +70,12 @@ public final class VanillaCorePlugin extends JavaPlugin {
     }
 
     private void registerListeners() {
+        pluginManager.registerEvents(new InventoryClickListener(playerCache), this);
+        pluginManager.registerEvents(new PlayerDropItemListener(playerCache), this);
+        pluginManager.registerEvents(new PlayerInteractListener(playerCache), this);
         pluginManager.registerEvents(new PlayerJoinListener(this), this);
+        pluginManager.registerEvents(new PlayerQuitListener(playerCache), this);
+        pluginManager.registerEvents(new PlayerRespawnListener(this), this);
         logger.info("The listeners have been registered!");
     }
 
