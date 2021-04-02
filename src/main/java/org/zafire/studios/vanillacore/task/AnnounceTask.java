@@ -53,7 +53,7 @@ public final class AnnounceTask {
     }
 
     private void announce(final String rawMessage) {
-        final Sound sound = Sound.sound(Key.key("note_block.pling"), Sound.Source.BLOCK, 2, 0);
+        final Sound sound = Sound.sound(Key.key("block.note_block.pling"), Sound.Source.BLOCK, 2, 0);
         server.playSound(sound);
 
         final TextComponent announceMessage = messageParser.parse(rawMessage);
