@@ -34,16 +34,21 @@ public final class CoordinatesTask {
         for (Player player : server.getOnlinePlayers()) {
             Location playerLocation = player.getLocation();
 
-            StringBuilder coordinates = new StringBuilder();
-            coordinates.append(playerLocation.getX());
-            coordinates.append(' ');
-            coordinates.append(playerLocation.getY());
-            coordinates.append(' ');
-            coordinates.append(playerLocation.getZ());
-
+            String coordinates = createCoordinates(playerLocation).toString();
             TextComponent coordinatesMessage = messageParser.parse("&6" + coordinates);
 
             player.sendActionBar(coordinatesMessage);
         }
+    }
+
+    private StringBuilder createCoordinates(final Location playerLocation) {
+        StringBuilder coordinates = new StringBuilder();
+        coordinates.append((int) playerLocation.getX());
+        coordinates.append(' ');
+        coordinates.append((int) playerLocation.getY());
+        coordinates.append(' ');
+        coordinates.append((int) playerLocation.getZ());
+
+        return coordinates;
     }
 }

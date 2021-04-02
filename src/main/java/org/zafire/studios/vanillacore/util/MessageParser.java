@@ -1,5 +1,6 @@
 package org.zafire.studios.vanillacore.util;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -14,6 +15,7 @@ public final class MessageParser {
     }
 
     public TextComponent parse(final String rawMessage) {
+        ChatColor.translateAlternateColorCodes('&', rawMessage);
         return Component.text(rawMessage);
     }
 
