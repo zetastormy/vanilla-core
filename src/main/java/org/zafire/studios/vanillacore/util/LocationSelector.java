@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.Server;
 
 public final class LocationSelector {
+    
     private final List<Location> locations;
 
     public LocationSelector(final Server server) {

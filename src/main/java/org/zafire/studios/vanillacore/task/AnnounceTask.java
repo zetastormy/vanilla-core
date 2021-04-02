@@ -11,7 +11,8 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.TextComponent;
 
-public class AnnounceTask {
+public final class AnnounceTask {
+    
     private final VanillaCorePlugin plugin;
     private final Server server;
     private final BukkitScheduler bukkitScheduler;

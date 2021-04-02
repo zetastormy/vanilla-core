@@ -13,6 +13,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.command.LobbyCommand;
 import org.zafire.studios.vanillacore.listener.PlayerJoinListener;
 import org.zafire.studios.vanillacore.task.AnnounceTask;
+import org.zafire.studios.vanillacore.task.CoordinatesTask;
 import org.zafire.studios.vanillacore.util.LocationSelector;
 import org.zafire.studios.vanillacore.util.MessageParser;
 import org.zafire.studios.vanillacore.util.PlayerCache;
@@ -75,6 +76,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
 
     private void scheduleTasks() {
         new AnnounceTask(this);
+        new CoordinatesTask(this)
         logger.info("The tasks have been scheduled!");
     }
 
