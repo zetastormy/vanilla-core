@@ -19,15 +19,13 @@ public final class PlayerQuitListener implements Listener {
     @EventHandler
     public void onPlayerQuit(final PlayerQuitEvent event) {
         final Player player = event.getPlayer();
-        event.quitMessage(null);
-
-        if (player == null)
-            return;
 
         final UUID playerUuid = player.getUniqueId();
 
         if (playerCache.isCached(playerUuid)) {
             playerCache.remove(playerUuid);
         }
+
+        event.quitMessage(null);
     }
 }
