@@ -76,7 +76,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
 
     private void scheduleTasks() {
         new AnnounceTask(this);
-        new CoordinatesTask(this)
+        new CoordinatesTask(this);
         logger.info("The tasks have been scheduled!");
     }
 
