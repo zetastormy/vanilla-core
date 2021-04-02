@@ -15,8 +15,7 @@ public final class MessageParser {
     }
 
     public TextComponent parse(final String rawMessage) {
-        ChatColor.translateAlternateColorCodes('&', rawMessage);
-        return Component.text(rawMessage);
+        return Component.text(ChatColor.translateAlternateColorCodes('&', rawMessage));
     }
 
     private String sanitize(final String rawMessage, final Player player) {
