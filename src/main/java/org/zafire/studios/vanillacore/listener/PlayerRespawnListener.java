@@ -1,35 +1,34 @@
 package org.zafire.studios.vanillacore.listener;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.CompassMeta;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.VanillaCorePlugin;
 import org.zafire.studios.vanillacore.util.DeathCache;
+import org.zafire.studios.vanillacore.util.DeathCompassCreator;
 import org.zafire.studios.vanillacore.util.LocationSelector;
-import org.zafire.studios.vanillacore.util.MessageParser;
-
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 
 public final class PlayerRespawnListener implements Listener {
 
     private final VanillaCorePlugin plugin;
     private final DeathCache deathCache;
-    private final MessageParser messageParser;
+    private final BukkitScheduler bukkitScheduler;
+    private final DeathCompassCreator deathCompassCreator;
 
     public PlayerRespawnListener(final VanillaCorePlugin plugin) {
         this.plugin = plugin;
         deathCache = plugin.getDeathCache();
-        messageParser = plugin.getMessageParser();
+        Server server = plugin.getServer();
+        bukkitScheduler = server.getScheduler();
+        deathCompassCreator = plugin.getDeathCompassCreator();
     }
 
     @EventHandler
@@ -42,24 +41,17 @@ public final class PlayerRespawnListener implements Listener {
             player.teleportAsync(location);
         }
 
-        final ItemStack deathCompass = new ItemStack(Material.COMPASS);
-        final CompassMeta deathCompassMeta = (CompassMeta) deathCompass.getItemMeta();
-
-        final TextComponent deathCompassName = messageParser.parse("&cBuscadora de catacumbas");
-
-        final List<Component> deathCompassLore = new ArrayList<>();
-        final TextComponent loreFirst = messageParser.parse("&8» &7Esta brújula apunta a tu lugar de muerte.");
-        deathCompassLore.add(loreFirst);
-
-        final Location deathLocation = deathCache.get(player.getUniqueId());
-
-        deathCompassMeta.displayName(deathCompassName);
-        deathCompassMeta.lore(deathCompassLore);
-        deathCompassMeta.setLodestone(deathLocation);
-
-        deathCompass.setItemMeta(deathCompassMeta);
+        final ItemStack deathCompass = deathCompassCreator.create();
 
         final Inventory playerInventory = player.getInventory();
         playerInventory.addItem(deathCompass);
+
+        final UUID playerUuid = player.getUniqueId();
+        final Location deathLocation = deathCache.get(playerUuid);
+
+        bukkitScheduler.runTaskLaterAsynchronously(plugin, () -> {
+            player.setCompassTarget(deathLocation);
+            deathCache.remove(playerUuid);
+        }, 60L);
     }
 }

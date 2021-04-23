@@ -21,6 +21,7 @@ import org.zafire.studios.vanillacore.listener.PlayerRespawnListener;
 import org.zafire.studios.vanillacore.task.AnnounceTask;
 import org.zafire.studios.vanillacore.task.CoordinatesTask;
 import org.zafire.studios.vanillacore.util.DeathCache;
+import org.zafire.studios.vanillacore.util.DeathCompassCreator;
 import org.zafire.studios.vanillacore.util.LocationSelector;
 import org.zafire.studios.vanillacore.util.MessageParser;
 import org.zafire.studios.vanillacore.util.PlayerCache;
@@ -36,6 +37,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
     private DeathCache deathCache;
     private BukkitScheduler bukkitScheduler;
     private Messenger messenger;
+    private DeathCompassCreator deathCompassCreator;
 
     public VanillaCorePlugin() {
         super();
@@ -70,6 +72,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
         deathCache = new DeathCache();
         bukkitScheduler = server.getScheduler();
         messenger = server.getMessenger();
+        deathCompassCreator = new DeathCompassCreator(this);
         logger.info("The object instances have been set!");
     }
 
@@ -114,5 +117,9 @@ public final class VanillaCorePlugin extends JavaPlugin {
 
     public DeathCache getDeathCache() {
         return deathCache;
+    }
+    
+    public DeathCompassCreator getDeathCompassCreator() {
+        return deathCompassCreator;
     }
 }
