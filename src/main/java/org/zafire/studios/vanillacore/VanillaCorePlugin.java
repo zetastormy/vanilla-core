@@ -22,7 +22,7 @@ import org.zafire.studios.vanillacore.task.AnnounceTask;
 import org.zafire.studios.vanillacore.task.CoordinatesTask;
 import org.zafire.studios.vanillacore.util.DeathCache;
 import org.zafire.studios.vanillacore.util.DeathCompassCreator;
-import org.zafire.studios.vanillacore.util.LocationSelector;
+import org.zafire.studios.vanillacore.util.PredefinedLocationSelector;
 import org.zafire.studios.vanillacore.util.MessageParser;
 import org.zafire.studios.vanillacore.util.PlayerCache;
 
@@ -31,7 +31,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
     private Logger logger;
     private Server server;
     private PluginManager pluginManager;
-    private LocationSelector locationSelector;
+    private PredefinedLocationSelector locationSelector;
     private MessageParser messageParser;
     private PlayerCache playerCache;
     private DeathCache deathCache;
@@ -66,7 +66,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
         logger = getLogger();
         server = getServer();
         pluginManager = server.getPluginManager();
-        locationSelector = new LocationSelector(server);
+        locationSelector = new PredefinedLocationSelector(server);
         messageParser = new MessageParser();
         playerCache = new PlayerCache();
         deathCache = new DeathCache();
@@ -103,7 +103,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
         logger.info("The channels have been registered!");
     }
 
-    public LocationSelector getLocationSelector() {
+    public PredefinedLocationSelector getLocationSelector() {
         return locationSelector;
     }
 

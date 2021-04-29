@@ -14,7 +14,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.VanillaCorePlugin;
 import org.zafire.studios.vanillacore.util.DeathCache;
 import org.zafire.studios.vanillacore.util.DeathCompassCreator;
-import org.zafire.studios.vanillacore.util.LocationSelector;
+import org.zafire.studios.vanillacore.util.PredefinedLocationSelector;
 
 public final class PlayerRespawnListener implements Listener {
 
@@ -36,9 +36,8 @@ public final class PlayerRespawnListener implements Listener {
         final Player player = event.getPlayer();
 
         if (player.getBedSpawnLocation() == null) {
-            LocationSelector locationSelector = plugin.getLocationSelector();
-            final Location location = locationSelector.getRandomLocation();
-            player.teleportAsync(location);
+            final PredefinedLocationSelector locationSelector = plugin.getLocationSelector();
+            player.teleportAsync(locationSelector.getRandomPredefinedLocation());
         }
 
         final ItemStack deathCompass = deathCompassCreator.create();

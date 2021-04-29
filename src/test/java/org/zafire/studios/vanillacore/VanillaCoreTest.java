@@ -5,7 +5,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.zafire.studios.vanillacore.util.LocationSelector;
+import org.zafire.studios.vanillacore.util.PredefinedLocationSelector;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -29,8 +29,8 @@ public class VanillaCoreTest {
 
     @Test
     public void testLocation() {
-        LocationSelector locationSelector = plugin.getLocationSelector();
-        Location location = locationSelector.getRandomLocation();
+        PredefinedLocationSelector locationSelector = plugin.getLocationSelector();
+        Location location = locationSelector.getRandomPredefinedLocation();
         location.setWorld(world);
         player.teleport(location);
         player.assertLocation(location, 10);
