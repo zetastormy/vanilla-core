@@ -8,7 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.zafire.studios.vanillacore.VanillaCorePlugin;
-import org.zafire.studios.vanillacore.util.DeathCache;
+import org.zafire.studios.vanillacore.util.cache.DeathCache;
 
 public final class PlayerDeathListener implements Listener {
 

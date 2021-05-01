@@ -1,4 +1,4 @@
-package org.zafire.studios.vanillacore.util;
+package org.zafire.studios.vanillacore.util.cache;
 
 import java.util.HashSet;
 import java.util.Set;

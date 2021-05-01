@@ -21,11 +21,11 @@ import org.zafire.studios.vanillacore.listener.PlayerQuitListener;
 import org.zafire.studios.vanillacore.listener.PlayerRespawnListener;
 import org.zafire.studios.vanillacore.task.AnnounceTask;
 import org.zafire.studios.vanillacore.task.CoordinatesTask;
-import org.zafire.studios.vanillacore.util.DeathCache;
 import org.zafire.studios.vanillacore.util.DeathCompassCreator;
 import org.zafire.studios.vanillacore.util.PredefinedLocationSelector;
+import org.zafire.studios.vanillacore.util.cache.DeathCache;
+import org.zafire.studios.vanillacore.util.cache.GeneralCache;
 import org.zafire.studios.vanillacore.util.MessageParser;
-import org.zafire.studios.vanillacore.util.GeneralCache;
 
 public final class VanillaCorePlugin extends JavaPlugin {
 

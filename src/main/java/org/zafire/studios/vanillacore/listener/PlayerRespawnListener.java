@@ -12,9 +12,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.VanillaCorePlugin;
-import org.zafire.studios.vanillacore.util.DeathCache;
 import org.zafire.studios.vanillacore.util.DeathCompassCreator;
 import org.zafire.studios.vanillacore.util.PredefinedLocationSelector;
+import org.zafire.studios.vanillacore.util.cache.DeathCache;
 
 public final class PlayerRespawnListener implements Listener {
 
