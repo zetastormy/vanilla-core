@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.VanillaCorePlugin;
 import org.zafire.studios.vanillacore.util.MessageParser;
-import org.zafire.studios.vanillacore.util.PlayerCache;
+import org.zafire.studios.vanillacore.util.GeneralCache;
 
 import net.kyori.adventure.text.TextComponent;
 
@@ -22,7 +22,7 @@ public final class LobbyCommand implements CommandExecutor {
 
     private final VanillaCorePlugin plugin;
     private final Logger logger;
-    private final PlayerCache playerCache;
+    private final GeneralCache<UUID> playerCache;
     private final MessageParser messageParser;
     private final BukkitScheduler bukkitScheduler;
 

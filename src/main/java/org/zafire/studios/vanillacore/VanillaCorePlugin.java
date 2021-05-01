@@ -1,6 +1,7 @@
 package org.zafire.studios.vanillacore;
 
 import java.io.File;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.bukkit.Server;
@@ -24,7 +25,7 @@ import org.zafire.studios.vanillacore.util.DeathCache;
 import org.zafire.studios.vanillacore.util.DeathCompassCreator;
 import org.zafire.studios.vanillacore.util.PredefinedLocationSelector;
 import org.zafire.studios.vanillacore.util.MessageParser;
-import org.zafire.studios.vanillacore.util.PlayerCache;
+import org.zafire.studios.vanillacore.util.GeneralCache;
 
 public final class VanillaCorePlugin extends JavaPlugin {
 
@@ -33,7 +34,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
     private PluginManager pluginManager;
     private PredefinedLocationSelector locationSelector;
     private MessageParser messageParser;
-    private PlayerCache playerCache;
+    private GeneralCache<UUID> playerCache;
     private DeathCache deathCache;
     private BukkitScheduler bukkitScheduler;
     private Messenger messenger;
@@ -68,7 +69,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
         pluginManager = server.getPluginManager();
         locationSelector = new PredefinedLocationSelector(server);
         messageParser = new MessageParser();
-        playerCache = new PlayerCache();
+        playerCache = new GeneralCache<>();
         deathCache = new DeathCache();
         bukkitScheduler = server.getScheduler();
         messenger = server.getMessenger();
@@ -111,7 +112,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
         return messageParser;
     }
 
-    public PlayerCache getPlayerCache() {
+    public GeneralCache<UUID> getPlayerCache() {
         return playerCache;
     }
 

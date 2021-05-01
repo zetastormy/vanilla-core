@@ -7,13 +7,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
-import org.zafire.studios.vanillacore.util.PlayerCache;
+import org.zafire.studios.vanillacore.util.GeneralCache;
 
 public final class PlayerDropItemListener implements Listener {
 
-    private final PlayerCache playerCache;
+    private final GeneralCache<UUID> playerCache;
 
-    public PlayerDropItemListener(final PlayerCache playerCache) {
+    public PlayerDropItemListener(final GeneralCache<UUID> playerCache) {
         this.playerCache = playerCache;
     }
 
