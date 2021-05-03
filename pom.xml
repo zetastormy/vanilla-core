@@ -4,7 +4,7 @@
 
   <groupId>org.zafire.studios</groupId>
   <artifactId>vanilla-core</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
 
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
