@@ -5,7 +5,9 @@
   <groupId>org.zafire.studios</groupId>
   <artifactId>vanilla-core</artifactId>
   <version>1.2.1</version>
+
   <name>VanillaCore</name>
+  <description>The Zafire Network core plugin for Survival Vanilla mode.</description>
 
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
@@ -56,7 +58,7 @@
   </dependencies>
 
   <build>
-    <finalName>${project.artifactId}</finalName>
+    <finalName>${project.name}</finalName>
     <resources>
       <resource>
         <directory>${project.basedir}/src/main/resources</directory>
