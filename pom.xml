@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.zafire.studios</groupId>
-  <artifactId>VanillaCore</artifactId>
+  <artifactId>vanilla-core</artifactId>
   <version>1.2.0</version>
 
   <properties>
