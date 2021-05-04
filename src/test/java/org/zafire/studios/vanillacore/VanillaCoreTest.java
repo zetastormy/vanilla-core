@@ -1,5 +1,7 @@
 package org.zafire.studios.vanillacore;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.bukkit.Location;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,7 +34,7 @@ public class VanillaCoreTest {
         PredefinedLocationSelector locationSelector = plugin.getLocationSelector();
         Location location = locationSelector.getRandomPredefinedLocation();
         location.setWorld(world);
-        player.teleport(location);
+        assertTrue(player.teleport(location), "Player teleportation failed!");
         player.assertLocation(location, 10);
     }
 
