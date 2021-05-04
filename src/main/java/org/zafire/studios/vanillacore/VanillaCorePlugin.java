@@ -73,13 +73,13 @@ public final class VanillaCorePlugin extends JavaPlugin {
         deathCache = new DeathCache();
         bukkitScheduler = server.getScheduler();
         messenger = server.getMessenger();
-        deathCompassCreator = new DeathCompassCreator(this);
+        deathCompassCreator = new DeathCompassCreator(messageParser);
         logger.info("The object instances have been set!");
     }
 
     private void registerListeners() {
         pluginManager.registerEvents(new InventoryClickListener(playerCache), this);
-        pluginManager.registerEvents(new PlayerDeathListener(this), this);
+        pluginManager.registerEvents(new PlayerDeathListener(deathCache), this);
         pluginManager.registerEvents(new PlayerDropItemListener(playerCache), this);
         pluginManager.registerEvents(new PlayerInteractListener(playerCache), this);
         pluginManager.registerEvents(new PlayerJoinListener(this), this);

@@ -7,7 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.zafire.studios.vanillacore.VanillaCorePlugin;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -16,8 +15,8 @@ public final class DeathCompassCreator {
 
     private final MessageParser messageParser;
 
-    public DeathCompassCreator(final VanillaCorePlugin plugin) {
-        messageParser = plugin.getMessageParser();
+    public DeathCompassCreator(final MessageParser messageParser) {
+        this.messageParser = messageParser;
     }
 
     public ItemStack create() {
