@@ -35,6 +35,8 @@ public final class PlayerRespawnListener implements Listener {
     public void onPlayerRespawn(final PlayerRespawnEvent event) {
         final Player player = event.getPlayer();
 
+        if (player == null) return;
+
         if (player.getBedSpawnLocation() == null) {
             final PredefinedLocationSelector locationSelector = plugin.getLocationSelector();
             player.teleportAsync(locationSelector.getRandomPredefinedLocation());
