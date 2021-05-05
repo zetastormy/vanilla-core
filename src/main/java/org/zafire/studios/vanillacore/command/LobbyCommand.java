@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,15 +19,13 @@ import net.kyori.adventure.text.TextComponent;
 public final class LobbyCommand implements CommandExecutor {
 
     private final VanillaCorePlugin plugin;
-    private final Logger logger;
     private final GeneralCache<UUID> uuidCache;
     private final MessageParser messageParser;
     private final BukkitScheduler scheduler;
 
-    public LobbyCommand(final VanillaCorePlugin plugin, final Logger logger, final GeneralCache<UUID> uuidCache,
+    public LobbyCommand(final VanillaCorePlugin plugin, final GeneralCache<UUID> uuidCache,
             final MessageParser messageParser, final BukkitScheduler scheduler) {
         this.plugin = plugin;
-        this.logger = logger;
         this.uuidCache = uuidCache;
         this.messageParser = messageParser;
         this.scheduler = scheduler;
@@ -46,21 +43,21 @@ public final class LobbyCommand implements CommandExecutor {
 
             player.saveData();
 
-            final TextComponent success = messageParser
+            final TextComponent successMessage = messageParser
                     .parse("&5&lZafire &8|| &7Teletransportándote al &6Lobby&7, por favor, espera.", player);
-            player.sendMessage(success);
+            player.sendMessage(successMessage);
 
-            final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            final DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+            final ByteArrayOutputStream byteArrayOutput = new ByteArrayOutputStream();
+            final DataOutputStream dataOutput = new DataOutputStream(byteArrayOutput);
 
             try {
-                dataOutputStream.writeUTF("Connect");
-                dataOutputStream.writeUTF("Lobby");
+                dataOutput.writeUTF("Connect");
+                dataOutput.writeUTF("Lobby");
             } catch (final IOException e) {
-                logger.severe("Could not send " + player.getName() + " to the Lobby server!");
+                e.printStackTrace();
             }
 
-            player.sendPluginMessage(plugin, "BungeeCord", byteArrayOutputStream.toByteArray());
+            player.sendPluginMessage(plugin, "BungeeCord", byteArrayOutput.toByteArray());
             return true;
         }
 
