@@ -12,47 +12,51 @@ import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.TextComponent;
 
 public final class AnnounceTask {
-    
+
     private final VanillaCorePlugin plugin;
-    private final Server server;
     private final BukkitScheduler bukkitScheduler;
     private final MessageParser messageParser;
 
-    public AnnounceTask(final VanillaCorePlugin plugin) {
+    public AnnounceTask(final VanillaCorePlugin plugin, final BukkitScheduler bukkitScheduler,
+            final MessageParser messageParser) {
         this.plugin = plugin;
-        server = plugin.getServer();
-        bukkitScheduler = server.getScheduler();
-        messageParser = plugin.getMessageParser();
+        this.bukkitScheduler = bukkitScheduler;
+        this.messageParser = messageParser;
         schedule();
     }
 
     public void schedule() {
         bukkitScheduler.runTaskTimerAsynchronously(plugin, () -> {
+            final Server server = plugin.getServer();
             final Random random = new Random();
             final int randomNumber = random.nextInt(4);
 
             switch (randomNumber) {
-            case 0:
-                announce("&6&lAnuncio &8|| &7Recuerda apoyarnos en la tienda del servidor&8: &6store.zafire.org");
-                break;
-            case 1:
-                announce("&6&lAnuncio &8|| &7No te olvides de seguirnos en Twitter&8: &6twitter.com/ZafireNT/");
-                break;
-            case 2:
-                announce("&6&lAnuncio &8|| &7Únete a nuestra comunidad de Discord&8: &6discord.zafire.org");
-                break;
-            case 3:
-                announce("&6&lConsejo &8|| &7Recuerda leerlas nuestras normas y respetarlas&8: &6rules.zafire.org");
-                break;
-            default:
-                announce(
-                        "&6&lAnuncio &8|| &7¡Comparte el servidor con tus conocidos para que la comunidad siga creciendo!");
-                break;
+                case 0:
+                    announce("&6&lAnuncio &8|| &7Recuerda apoyarnos en la tienda del servidor&8: &6store.zafire.org",
+                            server);
+                    break;
+                case 1:
+                    announce("&6&lAnuncio &8|| &7No te olvides de seguirnos en Twitter&8: &6twitter.com/ZafireNT/",
+                            server);
+                    break;
+                case 2:
+                    announce("&6&lAnuncio &8|| &7Únete a nuestra comunidad de Discord&8: &6discord.zafire.org", server);
+                    break;
+                case 3:
+                    announce("&6&lConsejo &8|| &7Recuerda leerlas nuestras normas y respetarlas&8: &6rules.zafire.org",
+                            server);
+                    break;
+                default:
+                    announce(
+                            "&6&lAnuncio &8|| &7¡Comparte el servidor con tus conocidos para que la comunidad siga creciendo!",
+                            server);
+                    break;
             }
         }, 3000L, 6000L);
     }
 
-    private void announce(final String rawMessage) {
+    private void announce(final String rawMessage, final Server server) {
         final Sound sound = Sound.sound(Key.key("block.note_block.pling"), Sound.Source.BLOCK, 2, 0);
         server.playSound(sound);
 

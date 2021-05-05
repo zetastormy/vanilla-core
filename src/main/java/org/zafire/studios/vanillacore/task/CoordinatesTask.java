@@ -13,25 +13,25 @@ import net.kyori.adventure.text.TextComponent;
 public final class CoordinatesTask {
 
     private final VanillaCorePlugin plugin;
-    private final Server server;
     private final BukkitScheduler bukkitScheduler;
     private final MessageParser messageParser;
 
-    public CoordinatesTask(final VanillaCorePlugin plugin) {
+    public CoordinatesTask(final VanillaCorePlugin plugin, final BukkitScheduler bukkitScheduler,
+            final MessageParser messageParser) {
         this.plugin = plugin;
-        server = plugin.getServer();
-        bukkitScheduler = server.getScheduler();
-        messageParser = plugin.getMessageParser();
+        this.bukkitScheduler = bukkitScheduler;
+        this.messageParser = messageParser;
         schedule();
     }
 
     public void schedule() {
         bukkitScheduler.runTaskTimerAsynchronously(plugin, () -> {
-            sendCoordinates();
+            final Server server = plugin.getServer();
+            sendCoordinates(server);
         }, 300L, 40L);
     }
 
-    private void sendCoordinates() {
+    private void sendCoordinates(final Server server) {
         for (Player player : server.getOnlinePlayers()) {
             String coordinates = createCoordinates(player).toString();
             TextComponent coordinatesMessage = messageParser.parse("&8» &a" + coordinates + " &8«");

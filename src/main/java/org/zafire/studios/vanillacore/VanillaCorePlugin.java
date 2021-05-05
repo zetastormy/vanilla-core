@@ -82,45 +82,27 @@ public final class VanillaCorePlugin extends JavaPlugin {
         pluginManager.registerEvents(new PlayerDeathListener(deathCache), this);
         pluginManager.registerEvents(new PlayerDropItemListener(playerCache), this);
         pluginManager.registerEvents(new PlayerInteractListener(playerCache), this);
-        pluginManager.registerEvents(new PlayerJoinListener(this), this);
+        pluginManager.registerEvents(new PlayerJoinListener(messageParser, locationSelector), this);
         pluginManager.registerEvents(new PlayerQuitListener(playerCache), this);
-        pluginManager.registerEvents(new PlayerRespawnListener(this), this);
+        pluginManager.registerEvents(
+                new PlayerRespawnListener(this, locationSelector, deathCache, bukkitScheduler, deathCompassCreator),
+                this);
         logger.info("The listeners have been registered!");
     }
 
     private void registerCommands() {
-        getCommand("lobby").setExecutor(new LobbyCommand(this));
+        getCommand("lobby").setExecutor(new LobbyCommand(this, logger, playerCache, messageParser, bukkitScheduler));
         logger.info("The command executors have been set!");
     }
 
     private void scheduleTasks() {
-        new AnnounceTask(this);
-        new CoordinatesTask(this);
+        new AnnounceTask(this, bukkitScheduler, messageParser);
+        new CoordinatesTask(this, bukkitScheduler, messageParser);
         logger.info("The tasks have been scheduled!");
     }
 
     private void registerChannels() {
         messenger.registerOutgoingPluginChannel(this, "BungeeCord");
         logger.info("The channels have been registered!");
-    }
-
-    public PredefinedLocationSelector getLocationSelector() {
-        return locationSelector;
-    }
-
-    public MessageParser getMessageParser() {
-        return messageParser;
-    }
-
-    public GeneralCache<UUID> getPlayerCache() {
-        return playerCache;
-    }
-
-    public DeathCache getDeathCache() {
-        return deathCache;
-    }
-    
-    public DeathCompassCreator getDeathCompassCreator() {
-        return deathCompassCreator;
     }
 }

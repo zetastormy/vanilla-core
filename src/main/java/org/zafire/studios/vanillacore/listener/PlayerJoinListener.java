@@ -5,20 +5,19 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.zafire.studios.vanillacore.VanillaCorePlugin;
-import org.zafire.studios.vanillacore.util.PredefinedLocationSelector;
 import org.zafire.studios.vanillacore.util.MessageParser;
+import org.zafire.studios.vanillacore.util.PredefinedLocationSelector;
 
 import net.kyori.adventure.text.TextComponent;
 
 public final class PlayerJoinListener implements Listener {
 
-    private final VanillaCorePlugin plugin;
     private final MessageParser messageParser;
+    private final PredefinedLocationSelector locationSelector;
 
-    public PlayerJoinListener(final VanillaCorePlugin plugin) {
-        this.plugin = plugin;
-        messageParser = plugin.getMessageParser();
+    public PlayerJoinListener(final MessageParser messageParser, final PredefinedLocationSelector locationSelector) {
+        this.messageParser = messageParser;
+        this.locationSelector = locationSelector;
     }
 
     @EventHandler
@@ -36,7 +35,6 @@ public final class PlayerJoinListener implements Listener {
                 event.joinMessage(newPlayer);
             }
 
-            PredefinedLocationSelector locationSelector = plugin.getLocationSelector();
             final Location location = locationSelector.getRandomPredefinedLocation();
             player.teleportAsync(location);
         }
@@ -44,7 +42,7 @@ public final class PlayerJoinListener implements Listener {
         if (player.hasPermission("sulphur.donator") && player.hasPlayedBefore()) {
             final TextComponent donatorPlayer = messageParser
                     .parse("&5&lZafire &8|| &7El usuario &6" + player.getName() + " &7ha entrado al servidor.", player);
-                    
+
             event.joinMessage(donatorPlayer);
         }
     }

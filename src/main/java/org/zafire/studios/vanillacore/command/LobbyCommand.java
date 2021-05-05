@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,13 +25,13 @@ public final class LobbyCommand implements CommandExecutor {
     private final MessageParser messageParser;
     private final BukkitScheduler bukkitScheduler;
 
-    public LobbyCommand(final VanillaCorePlugin plugin) {
+    public LobbyCommand(final VanillaCorePlugin plugin, final Logger logger, final GeneralCache<UUID> playerCache,
+            final MessageParser messageParser, final BukkitScheduler bukkitScheduler) {
         this.plugin = plugin;
-        Server server = plugin.getServer();
-        logger = plugin.getLogger();
-        playerCache = plugin.getPlayerCache();
-        messageParser = plugin.getMessageParser();
-        bukkitScheduler = server.getScheduler();
+        this.logger = logger;
+        this.playerCache = playerCache;
+        this.messageParser = messageParser;
+        this.bukkitScheduler = bukkitScheduler;
     }
 
     @Override
@@ -43,9 +42,7 @@ public final class LobbyCommand implements CommandExecutor {
             final UUID playerUuid = player.getUniqueId();
             playerCache.add(playerUuid);
 
-            bukkitScheduler.runTaskLater(plugin,
-                    () -> playerCache.remove(playerUuid),
-                    4000L);
+            bukkitScheduler.runTaskLater(plugin, () -> playerCache.remove(playerUuid), 4000L);
 
             player.saveData();
 

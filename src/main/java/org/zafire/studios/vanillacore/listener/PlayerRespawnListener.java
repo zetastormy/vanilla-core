@@ -3,7 +3,6 @@ package org.zafire.studios.vanillacore.listener;
 import java.util.UUID;
 
 import org.bukkit.Location;
-import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,26 +18,28 @@ import org.zafire.studios.vanillacore.util.cache.DeathCache;
 public final class PlayerRespawnListener implements Listener {
 
     private final VanillaCorePlugin plugin;
+    private final PredefinedLocationSelector locationSelector;
+    private final DeathCompassCreator deathCompassCreator;
     private final DeathCache deathCache;
     private final BukkitScheduler bukkitScheduler;
-    private final DeathCompassCreator deathCompassCreator;
 
-    public PlayerRespawnListener(final VanillaCorePlugin plugin) {
+    public PlayerRespawnListener(final VanillaCorePlugin plugin, final PredefinedLocationSelector locationSelector, final DeathCache deathCache,
+            final BukkitScheduler bukkitScheduler, final DeathCompassCreator deathCompassCreator) {
         this.plugin = plugin;
-        deathCache = plugin.getDeathCache();
-        Server server = plugin.getServer();
-        bukkitScheduler = server.getScheduler();
-        deathCompassCreator = plugin.getDeathCompassCreator();
+        this.locationSelector = locationSelector;
+        this.deathCache = deathCache;
+        this.bukkitScheduler = bukkitScheduler;
+        this.deathCompassCreator = deathCompassCreator;
     }
 
     @EventHandler
     public void onPlayerRespawn(final PlayerRespawnEvent event) {
         final Player player = event.getPlayer();
 
-        if (player == null) return;
+        if (player == null)
+            return;
 
         if (player.getBedSpawnLocation() == null) {
-            final PredefinedLocationSelector locationSelector = plugin.getLocationSelector();
             player.teleportAsync(locationSelector.getRandomPredefinedLocation());
         }
 
