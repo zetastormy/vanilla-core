@@ -4,19 +4,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 public final class GeneralCache<T> {
-    
+
     private final Set<T> cacheContainer = new HashSet<>();
 
-    public void add(final T playerUuid) {
-        cacheContainer.add(playerUuid);
+    public void add(final T t) {
+        cacheContainer.add(t);
     }
 
-    public void remove(final T playerUuid) {
-        cacheContainer.remove(playerUuid);
+    public void remove(final T t) {
+        cacheContainer.remove(t);
     }
 
-    public boolean isCached(final T playerUuid) {
-        return cacheContainer.contains(playerUuid);
+    public boolean isCached(final T t) {
+        return cacheContainer.contains(t);
     }
 
     public int size() {

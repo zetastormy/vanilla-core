@@ -21,14 +21,15 @@ public final class PlayerRespawnListener implements Listener {
     private final PredefinedLocationSelector locationSelector;
     private final DeathCompassCreator deathCompassCreator;
     private final DeathCache deathCache;
-    private final BukkitScheduler bukkitScheduler;
+    private final BukkitScheduler scheduler;
 
-    public PlayerRespawnListener(final VanillaCorePlugin plugin, final PredefinedLocationSelector locationSelector, final DeathCache deathCache,
-            final BukkitScheduler bukkitScheduler, final DeathCompassCreator deathCompassCreator) {
+    public PlayerRespawnListener(final VanillaCorePlugin plugin, final PredefinedLocationSelector locationSelector,
+            final DeathCache deathCache, final BukkitScheduler scheduler,
+            final DeathCompassCreator deathCompassCreator) {
         this.plugin = plugin;
         this.locationSelector = locationSelector;
         this.deathCache = deathCache;
-        this.bukkitScheduler = bukkitScheduler;
+        this.scheduler = scheduler;
         this.deathCompassCreator = deathCompassCreator;
     }
 
@@ -51,7 +52,7 @@ public final class PlayerRespawnListener implements Listener {
         final UUID playerUuid = player.getUniqueId();
         final Location deathLocation = deathCache.get(playerUuid);
 
-        bukkitScheduler.runTaskLaterAsynchronously(plugin, () -> {
+        scheduler.runTaskLaterAsynchronously(plugin, () -> {
             player.setCompassTarget(deathLocation);
             deathCache.remove(playerUuid);
         }, 60L);

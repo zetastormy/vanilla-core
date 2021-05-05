@@ -11,21 +11,22 @@ import org.zafire.studios.vanillacore.util.cache.GeneralCache;
 
 public final class PlayerDropItemListener implements Listener {
 
-    private final GeneralCache<UUID> playerCache;
+    private final GeneralCache<UUID> uuidCache;
 
-    public PlayerDropItemListener(final GeneralCache<UUID> playerCache) {
-        this.playerCache = playerCache;
+    public PlayerDropItemListener(final GeneralCache<UUID> uuidCache) {
+        this.uuidCache = uuidCache;
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerDropItem(final PlayerDropItemEvent event) {
         final Player player = event.getPlayer();
 
-        if (player == null) return;
+        if (player == null)
+            return;
 
         final UUID playerUuid = player.getUniqueId();
 
-        if (playerCache.isCached(playerUuid)) {
+        if (uuidCache.isCached(playerUuid)) {
             event.setCancelled(true);
         }
     }

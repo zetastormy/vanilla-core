@@ -10,21 +10,22 @@ import org.zafire.studios.vanillacore.util.cache.GeneralCache;
 
 public final class InventoryClickListener implements Listener {
 
-    private final GeneralCache<UUID> playerCache;
+    private final GeneralCache<UUID> uuidCache;
 
-    public InventoryClickListener(final GeneralCache<UUID> playerCache) {
-        this.playerCache = playerCache;
+    public InventoryClickListener(final GeneralCache<UUID> uuidCache) {
+        this.uuidCache = uuidCache;
     }
 
     @EventHandler
     public void onInventoryClick(final InventoryClickEvent event) {
         final Player player = (Player) event.getWhoClicked();
 
-        if (player == null) return;
+        if (player == null)
+            return;
 
         final UUID playerUuid = player.getUniqueId();
 
-        if (playerCache.isCached(playerUuid)) {
+        if (uuidCache.isCached(playerUuid)) {
             event.setCancelled(true);
         }
     }

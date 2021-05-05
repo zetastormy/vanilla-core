@@ -21,7 +21,8 @@ public final class PlayerDeathListener implements Listener {
     public void onPlayerDeath(final PlayerDeathEvent event) {
         final Player player = event.getEntity();
 
-        if (player == null) return;
+        if (player == null)
+            return;
 
         final UUID playerUuid = player.getUniqueId();
         final Location deathLocation = player.getLocation();

@@ -10,22 +10,23 @@ import org.zafire.studios.vanillacore.util.cache.GeneralCache;
 
 public final class PlayerInteractListener implements Listener {
 
-    private final GeneralCache<UUID> playerCache;
+    private final GeneralCache<UUID> uuidCache;
 
-    public PlayerInteractListener(final GeneralCache<UUID> playerCache) {
-        this.playerCache = playerCache;
+    public PlayerInteractListener(final GeneralCache<UUID> uuidCache) {
+        this.uuidCache = uuidCache;
     }
-    
+
     @EventHandler
     public void onPlayerInteract(final PlayerInteractEvent event) {
         final Player player = event.getPlayer();
 
-        if (player == null) return;
+        if (player == null)
+            return;
 
         final UUID playerUuid = player.getUniqueId();
-        
-        if (playerCache.isCached(playerUuid)) {
-            playerCache.remove(playerUuid);
+
+        if (uuidCache.isCached(playerUuid)) {
+            uuidCache.remove(playerUuid);
         }
     }
 }

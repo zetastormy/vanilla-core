@@ -7,7 +7,7 @@ import java.util.UUID;
 import org.bukkit.Location;
 
 public final class DeathCache {
-    
+
     private final Map<UUID, Location> deathLocationCache = new HashMap<>();
 
     public void add(final UUID playerUuid, Location deathLocation) {

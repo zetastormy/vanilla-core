@@ -13,19 +13,19 @@ import net.kyori.adventure.text.TextComponent;
 public final class CoordinatesTask {
 
     private final VanillaCorePlugin plugin;
-    private final BukkitScheduler bukkitScheduler;
+    private final BukkitScheduler scheduler;
     private final MessageParser messageParser;
 
-    public CoordinatesTask(final VanillaCorePlugin plugin, final BukkitScheduler bukkitScheduler,
+    public CoordinatesTask(final VanillaCorePlugin plugin, final BukkitScheduler scheduler,
             final MessageParser messageParser) {
         this.plugin = plugin;
-        this.bukkitScheduler = bukkitScheduler;
+        this.scheduler = scheduler;
         this.messageParser = messageParser;
         schedule();
     }
 
     public void schedule() {
-        bukkitScheduler.runTaskTimerAsynchronously(plugin, () -> {
+        scheduler.runTaskTimerAsynchronously(plugin, () -> {
             final Server server = plugin.getServer();
             sendCoordinates(server);
         }, 300L, 40L);

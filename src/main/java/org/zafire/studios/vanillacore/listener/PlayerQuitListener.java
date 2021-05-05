@@ -10,22 +10,23 @@ import org.zafire.studios.vanillacore.util.cache.GeneralCache;
 
 public final class PlayerQuitListener implements Listener {
 
-    private final GeneralCache<UUID> playerCache;
+    private final GeneralCache<UUID> uuidCache;
 
-    public PlayerQuitListener(final GeneralCache<UUID> playerCache) {
-        this.playerCache = playerCache;
+    public PlayerQuitListener(final GeneralCache<UUID> uuidCache) {
+        this.uuidCache = uuidCache;
     }
 
     @EventHandler
     public void onPlayerQuit(final PlayerQuitEvent event) {
         final Player player = event.getPlayer();
 
-        if (player == null) return;
+        if (player == null)
+            return;
 
         final UUID playerUuid = player.getUniqueId();
 
-        if (playerCache.isCached(playerUuid)) {
-            playerCache.remove(playerUuid);
+        if (uuidCache.isCached(playerUuid)) {
+            uuidCache.remove(playerUuid);
         }
 
         event.quitMessage(null);

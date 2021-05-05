@@ -21,17 +21,17 @@ public final class LobbyCommand implements CommandExecutor {
 
     private final VanillaCorePlugin plugin;
     private final Logger logger;
-    private final GeneralCache<UUID> playerCache;
+    private final GeneralCache<UUID> uuidCache;
     private final MessageParser messageParser;
-    private final BukkitScheduler bukkitScheduler;
+    private final BukkitScheduler scheduler;
 
-    public LobbyCommand(final VanillaCorePlugin plugin, final Logger logger, final GeneralCache<UUID> playerCache,
-            final MessageParser messageParser, final BukkitScheduler bukkitScheduler) {
+    public LobbyCommand(final VanillaCorePlugin plugin, final Logger logger, final GeneralCache<UUID> uuidCache,
+            final MessageParser messageParser, final BukkitScheduler scheduler) {
         this.plugin = plugin;
         this.logger = logger;
-        this.playerCache = playerCache;
+        this.uuidCache = uuidCache;
         this.messageParser = messageParser;
-        this.bukkitScheduler = bukkitScheduler;
+        this.scheduler = scheduler;
     }
 
     @Override
@@ -40,9 +40,9 @@ public final class LobbyCommand implements CommandExecutor {
         if (sender instanceof Player) {
             final Player player = (Player) sender;
             final UUID playerUuid = player.getUniqueId();
-            playerCache.add(playerUuid);
+            uuidCache.add(playerUuid);
 
-            bukkitScheduler.runTaskLater(plugin, () -> playerCache.remove(playerUuid), 4000L);
+            scheduler.runTaskLater(plugin, () -> uuidCache.remove(playerUuid), 4000L);
 
             player.saveData();
 

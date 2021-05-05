@@ -34,9 +34,9 @@ public final class VanillaCorePlugin extends JavaPlugin {
     private PluginManager pluginManager;
     private PredefinedLocationSelector locationSelector;
     private MessageParser messageParser;
-    private GeneralCache<UUID> playerCache;
+    private GeneralCache<UUID> uuidCache;
     private DeathCache deathCache;
-    private BukkitScheduler bukkitScheduler;
+    private BukkitScheduler scheduler;
     private Messenger messenger;
     private DeathCompassCreator deathCompassCreator;
 
@@ -60,7 +60,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        bukkitScheduler.cancelTasks(this);
+        scheduler.cancelTasks(this);
     }
 
     private void setInstances() {
@@ -69,35 +69,34 @@ public final class VanillaCorePlugin extends JavaPlugin {
         pluginManager = server.getPluginManager();
         locationSelector = new PredefinedLocationSelector(server);
         messageParser = new MessageParser();
-        playerCache = new GeneralCache<>();
+        uuidCache = new GeneralCache<>();
         deathCache = new DeathCache();
-        bukkitScheduler = server.getScheduler();
+        scheduler = server.getScheduler();
         messenger = server.getMessenger();
         deathCompassCreator = new DeathCompassCreator(messageParser);
         logger.info("The object instances have been set!");
     }
 
     private void registerListeners() {
-        pluginManager.registerEvents(new InventoryClickListener(playerCache), this);
+        pluginManager.registerEvents(new InventoryClickListener(uuidCache), this);
         pluginManager.registerEvents(new PlayerDeathListener(deathCache), this);
-        pluginManager.registerEvents(new PlayerDropItemListener(playerCache), this);
-        pluginManager.registerEvents(new PlayerInteractListener(playerCache), this);
+        pluginManager.registerEvents(new PlayerDropItemListener(uuidCache), this);
+        pluginManager.registerEvents(new PlayerInteractListener(uuidCache), this);
         pluginManager.registerEvents(new PlayerJoinListener(messageParser, locationSelector), this);
-        pluginManager.registerEvents(new PlayerQuitListener(playerCache), this);
+        pluginManager.registerEvents(new PlayerQuitListener(uuidCache), this);
         pluginManager.registerEvents(
-                new PlayerRespawnListener(this, locationSelector, deathCache, bukkitScheduler, deathCompassCreator),
-                this);
+                new PlayerRespawnListener(this, locationSelector, deathCache, scheduler, deathCompassCreator), this);
         logger.info("The listeners have been registered!");
     }
 
     private void registerCommands() {
-        getCommand("lobby").setExecutor(new LobbyCommand(this, logger, playerCache, messageParser, bukkitScheduler));
+        getCommand("lobby").setExecutor(new LobbyCommand(this, logger, uuidCache, messageParser, scheduler));
         logger.info("The command executors have been set!");
     }
 
     private void scheduleTasks() {
-        new AnnounceTask(this, bukkitScheduler, messageParser);
-        new CoordinatesTask(this, bukkitScheduler, messageParser);
+        new AnnounceTask(this, scheduler, messageParser);
+        new CoordinatesTask(this, scheduler, messageParser);
         logger.info("The tasks have been scheduled!");
     }
 
