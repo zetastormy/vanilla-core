@@ -8,6 +8,7 @@
 
   <name>VanillaCore</name>
   <description>The Zafire Network core plugin for Survival Vanilla mode.</description>
+  <url>https://github.com/ZafireStudios/VanillaCore</url>
 
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
@@ -16,10 +17,6 @@
   </properties>
 
   <repositories>
-    <repository>
-      <id>spigot-repo</id>
-      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-    </repository>
     <repository>
       <id>placeholderapi</id>
       <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
