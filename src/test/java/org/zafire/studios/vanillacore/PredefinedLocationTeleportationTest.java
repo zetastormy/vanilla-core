@@ -15,23 +15,22 @@ import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 
 @Disabled("MockBukkit doesn't support Paper API")
-public class VanillaCoreTest {
+public class PredefinedLocationTeleportationTest {
     private ServerMock server;
-    private VanillaCorePlugin plugin;
+    private PredefinedLocationSelector locationSelector;
     private PlayerMock player;
     private WorldMock world;
 
     @BeforeAll
     public void setUp() {
         server = MockBukkit.mock();
-        plugin = (VanillaCorePlugin) MockBukkit.load(VanillaCorePlugin.class);
+        locationSelector = new PredefinedLocationSelector(server);
         player = server.addPlayer("ZetaStormy");
         world = server.addSimpleWorld("world");
     }
 
     @Test
-    public void testLocation() {
-        PredefinedLocationSelector locationSelector = plugin.getLocationSelector();
+    public void testTeleportationToRandomPredefinedLocation() {
         Location location = locationSelector.getRandomPredefinedLocation();
         location.setWorld(world);
         assertTrue(player.teleport(location), "Player teleportation failed!");
