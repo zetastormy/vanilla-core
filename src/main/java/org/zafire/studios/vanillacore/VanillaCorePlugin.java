@@ -90,7 +90,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
     }
 
     private void registerCommands() {
-        getCommand("lobby").setExecutor(new LobbyCommand(this, logger, uuidCache, messageParser, scheduler));
+        getCommand("lobby").setExecutor(new LobbyCommand(this, uuidCache, messageParser, scheduler));
         logger.info("The command executors have been set!");
     }
 
