@@ -6,13 +6,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.zafire.studios.vanillacore.util.cache.GeneralCache;
+import org.zafire.studios.vanillacore.util.cache.GenericCache;
 
 public final class PlayerInteractListener implements Listener {
 
-    private final GeneralCache<UUID> uuidCache;
+    private final GenericCache<UUID> uuidCache;
 
-    public PlayerInteractListener(final GeneralCache<UUID> uuidCache) {
+    public PlayerInteractListener(final GenericCache<UUID> uuidCache) {
         this.uuidCache = uuidCache;
     }
 

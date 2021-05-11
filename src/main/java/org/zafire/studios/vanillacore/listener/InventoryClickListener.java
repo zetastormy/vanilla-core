@@ -6,13 +6,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.zafire.studios.vanillacore.util.cache.GeneralCache;
+import org.zafire.studios.vanillacore.util.cache.GenericCache;
 
 public final class InventoryClickListener implements Listener {
 
-    private final GeneralCache<UUID> uuidCache;
+    private final GenericCache<UUID> uuidCache;
 
-    public InventoryClickListener(final GeneralCache<UUID> uuidCache) {
+    public InventoryClickListener(final GenericCache<UUID> uuidCache) {
         this.uuidCache = uuidCache;
     }
 

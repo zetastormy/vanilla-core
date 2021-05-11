@@ -3,7 +3,7 @@ package org.zafire.studios.vanillacore.util.cache;
 import java.util.HashSet;
 import java.util.Set;
 
-public final class GeneralCache<T> {
+public final class GenericCache<T> {
 
     private final Set<T> cacheContainer = new HashSet<>();
 

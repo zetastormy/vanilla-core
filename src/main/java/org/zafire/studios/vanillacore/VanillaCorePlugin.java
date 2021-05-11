@@ -24,7 +24,7 @@ import org.zafire.studios.vanillacore.task.CoordinatesTask;
 import org.zafire.studios.vanillacore.util.DeathCompassCreator;
 import org.zafire.studios.vanillacore.util.PredefinedLocationSelector;
 import org.zafire.studios.vanillacore.util.cache.DeathCache;
-import org.zafire.studios.vanillacore.util.cache.GeneralCache;
+import org.zafire.studios.vanillacore.util.cache.GenericCache;
 import org.zafire.studios.vanillacore.util.MessageParser;
 
 public final class VanillaCorePlugin extends JavaPlugin {
@@ -34,7 +34,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
     private PluginManager pluginManager;
     private PredefinedLocationSelector locationSelector;
     private MessageParser messageParser;
-    private GeneralCache<UUID> uuidCache;
+    private GenericCache<UUID> uuidCache;
     private DeathCache deathCache;
     private BukkitScheduler scheduler;
     private Messenger messenger;
@@ -69,7 +69,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
         pluginManager = server.getPluginManager();
         locationSelector = new PredefinedLocationSelector(server);
         messageParser = new MessageParser();
-        uuidCache = new GeneralCache<>();
+        uuidCache = new GenericCache<>();
         deathCache = new DeathCache();
         scheduler = server.getScheduler();
         messenger = server.getMessenger();
