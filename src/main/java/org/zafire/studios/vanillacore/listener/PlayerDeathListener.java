@@ -1,5 +1,6 @@
 package org.zafire.studios.vanillacore.listener;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Location;
@@ -7,14 +8,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
+import org.zafire.studios.vanillacore.util.DeathCompassCreator;
 import org.zafire.studios.vanillacore.util.cache.DeathCache;
 
 public final class PlayerDeathListener implements Listener {
 
     private final DeathCache deathCache;
+    private final DeathCompassCreator deathCompassCreator;
 
-    public PlayerDeathListener(final DeathCache deathCache) {
+    public PlayerDeathListener(final DeathCache deathCache, final DeathCompassCreator deathCompassCreator) {
         this.deathCache = deathCache;
+        this.deathCompassCreator = deathCompassCreator;
     }
 
     @EventHandler
@@ -28,5 +33,14 @@ public final class PlayerDeathListener implements Listener {
         final Location deathLocation = player.getLocation();
 
         deathCache.add(playerUuid, deathLocation);
+
+        final ItemStack deathCompass = deathCompassCreator.create();
+        final List<ItemStack> deathDrops = event.getDrops();
+
+        for (ItemStack item : deathDrops) {
+            if (item.isSimilar(deathCompass)) {
+                deathDrops.remove(item);
+            }
+        }
     }
 }
