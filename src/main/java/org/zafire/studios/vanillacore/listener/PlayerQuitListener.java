@@ -19,6 +19,7 @@ public final class PlayerQuitListener implements Listener {
     @EventHandler
     public void onPlayerQuit(final PlayerQuitEvent event) {
         final Player player = event.getPlayer();
+        event.quitMessage(null);
 
         if (player == null)
             return;
@@ -29,6 +30,5 @@ public final class PlayerQuitListener implements Listener {
             uuidCache.remove(playerUuid);
         }
 
-        event.quitMessage(null);
     }
 }
