@@ -2,6 +2,7 @@ package org.zafire.studios.vanillacore.listener;
 
 import java.util.UUID;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -44,6 +45,7 @@ public final class PlayerDropItemListener implements Listener {
 
         if (itemDropped.isSimilar(deathCompass)) {
             event.setCancelled(true);
+            itemDropped.setType(Material.AIR);
             final TextComponent destroyMessage = messageParser.parse("&2&lSurvival &8|| &7Has tirado tu buscadora de catacumbas, y esta al perder el enlace contigo fue destruida.", player);
             player.sendMessage(destroyMessage);
         }
