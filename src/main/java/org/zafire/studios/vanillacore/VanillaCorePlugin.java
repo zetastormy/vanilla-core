@@ -13,6 +13,8 @@ import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.command.LobbyCommand;
 import org.zafire.studios.vanillacore.listener.InventoryClickListener;
+import org.zafire.studios.vanillacore.listener.InventoryDragListener;
+import org.zafire.studios.vanillacore.listener.InventoryMoveItemListener;
 import org.zafire.studios.vanillacore.listener.PlayerDeathListener;
 import org.zafire.studios.vanillacore.listener.PlayerDropItemListener;
 import org.zafire.studios.vanillacore.listener.PlayerInteractListener;
@@ -79,6 +81,8 @@ public final class VanillaCorePlugin extends JavaPlugin {
 
     private void registerListeners() {
         pluginManager.registerEvents(new InventoryClickListener(uuidCache), this);
+        pluginManager.registerEvents(new InventoryDragListener(), this);
+        pluginManager.registerEvents(new InventoryMoveItemListener(), this);
         pluginManager.registerEvents(new PlayerDeathListener(deathCache), this);
         pluginManager.registerEvents(new PlayerDropItemListener(uuidCache, messageParser), this);
         pluginManager.registerEvents(new PlayerInteractListener(uuidCache), this);
