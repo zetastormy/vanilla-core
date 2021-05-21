@@ -14,13 +14,10 @@ public final class CoordinatesTask {
 
     private final VanillaCorePlugin plugin;
     private final BukkitScheduler scheduler;
-    private final MessageParser messageParser;
 
-    public CoordinatesTask(final VanillaCorePlugin plugin, final BukkitScheduler scheduler,
-            final MessageParser messageParser) {
+    public CoordinatesTask(final VanillaCorePlugin plugin, final BukkitScheduler scheduler) {
         this.plugin = plugin;
         this.scheduler = scheduler;
-        this.messageParser = messageParser;
         schedule();
     }
 
@@ -34,7 +31,7 @@ public final class CoordinatesTask {
     private void sendCoordinates(final Server server) {
         for (Player player : server.getOnlinePlayers()) {
             String coordinates = createCoordinates(player).toString();
-            TextComponent coordinatesMessage = messageParser.parse("&8» &a" + coordinates + " &8«");
+            TextComponent coordinatesMessage = MessageParser.parse("&8» &a" + coordinates + " &8«");
 
             player.sendActionBar(coordinatesMessage);
         }

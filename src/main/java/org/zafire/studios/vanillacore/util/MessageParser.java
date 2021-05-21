@@ -9,16 +9,16 @@ import net.kyori.adventure.text.TextComponent;
 
 public final class MessageParser {
 
-    public TextComponent parse(final String rawMessage, final Player player) {
+    public static TextComponent parse(final String rawMessage, final Player player) {
         final String message = sanitize(rawMessage, player);
         return Component.text(message);
     }
 
-    public TextComponent parse(final String rawMessage) {
+    public static TextComponent parse(final String rawMessage) {
         return Component.text(ChatColor.translateAlternateColorCodes('&', rawMessage));
     }
 
-    private String sanitize(final String rawMessage, final Player player) {
+    private static String sanitize(final String rawMessage, final Player player) {
         return PlaceholderAPI.setPlaceholders(player, rawMessage);
     }
 

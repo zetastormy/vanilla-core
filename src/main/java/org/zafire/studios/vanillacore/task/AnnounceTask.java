@@ -15,13 +15,10 @@ public final class AnnounceTask {
 
     private final VanillaCorePlugin plugin;
     private final BukkitScheduler scheduler;
-    private final MessageParser messageParser;
 
-    public AnnounceTask(final VanillaCorePlugin plugin, final BukkitScheduler scheduler,
-            final MessageParser messageParser) {
+    public AnnounceTask(final VanillaCorePlugin plugin, final BukkitScheduler scheduler) {
         this.plugin = plugin;
         this.scheduler = scheduler;
-        this.messageParser = messageParser;
         schedule();
     }
 
@@ -60,7 +57,7 @@ public final class AnnounceTask {
         final Sound sound = Sound.sound(Key.key("block.note_block.pling"), Sound.Source.BLOCK, 2, 0);
         server.playSound(sound);
 
-        final TextComponent announceMessage = messageParser.parse(rawMessage);
+        final TextComponent announceMessage = MessageParser.parse(rawMessage);
         server.sendMessage(announceMessage);
     }
 }

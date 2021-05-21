@@ -20,11 +20,9 @@ import net.minecraft.server.v1_16_R3.NBTTagCompound;
 public final class PlayerDropItemListener implements Listener {
 
     private final GenericCache<UUID> uuidCache;
-    private final MessageParser messageParser;
 
-    public PlayerDropItemListener(final GenericCache<UUID> uuidCache, final MessageParser messageParser) {
+    public PlayerDropItemListener(final GenericCache<UUID> uuidCache) {
         this.uuidCache = uuidCache;
-        this.messageParser = messageParser;
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
@@ -46,7 +44,7 @@ public final class PlayerDropItemListener implements Listener {
             final Sound sound = Sound.sound(Key.key("entity.item.break"), Sound.Source.NEUTRAL, 2, 0);
             player.playSound(sound);
 
-            final TextComponent destroyMessage = messageParser
+            final TextComponent destroyMessage = MessageParser
                     .parse("&2&lSurvival &8|| &7Tu buscadora de catacumbas ha sido destruida.", player);
             player.sendMessage(destroyMessage);
         }

@@ -20,14 +20,11 @@ public final class LobbyCommand implements CommandExecutor {
 
     private final VanillaCorePlugin plugin;
     private final GenericCache<UUID> uuidCache;
-    private final MessageParser messageParser;
     private final BukkitScheduler scheduler;
 
-    public LobbyCommand(final VanillaCorePlugin plugin, final GenericCache<UUID> uuidCache,
-            final MessageParser messageParser, final BukkitScheduler scheduler) {
+    public LobbyCommand(final VanillaCorePlugin plugin, final GenericCache<UUID> uuidCache, final BukkitScheduler scheduler) {
         this.plugin = plugin;
         this.uuidCache = uuidCache;
-        this.messageParser = messageParser;
         this.scheduler = scheduler;
     }
 
@@ -43,7 +40,7 @@ public final class LobbyCommand implements CommandExecutor {
 
             player.saveData();
 
-            final TextComponent successMessage = messageParser
+            final TextComponent successMessage = MessageParser
                     .parse("&5&lZafire &8|| &7Teletransportándote al &6Lobby&7, por favor, espera.", player);
             player.sendMessage(successMessage);
 

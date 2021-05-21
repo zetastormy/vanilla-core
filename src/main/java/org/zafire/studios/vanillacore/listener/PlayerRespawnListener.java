@@ -11,26 +11,21 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.VanillaCorePlugin;
-import org.zafire.studios.vanillacore.util.DeathCompassCreator;
-import org.zafire.studios.vanillacore.util.PredefinedLocationSelector;
+import org.zafire.studios.vanillacore.util.DeathCompass;
+import org.zafire.studios.vanillacore.util.LocationSelector;
 import org.zafire.studios.vanillacore.util.cache.DeathCache;
 
 public final class PlayerRespawnListener implements Listener {
 
     private final VanillaCorePlugin plugin;
-    private final PredefinedLocationSelector locationSelector;
-    private final DeathCompassCreator deathCompassCreator;
     private final DeathCache deathCache;
     private final BukkitScheduler scheduler;
 
-    public PlayerRespawnListener(final VanillaCorePlugin plugin, final PredefinedLocationSelector locationSelector,
-            final DeathCache deathCache, final BukkitScheduler scheduler,
-            final DeathCompassCreator deathCompassCreator) {
+    public PlayerRespawnListener(final VanillaCorePlugin plugin, final DeathCache deathCache,
+            final BukkitScheduler scheduler) {
         this.plugin = plugin;
-        this.locationSelector = locationSelector;
         this.deathCache = deathCache;
         this.scheduler = scheduler;
-        this.deathCompassCreator = deathCompassCreator;
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -38,10 +33,10 @@ public final class PlayerRespawnListener implements Listener {
         final Player player = event.getPlayer();
 
         if (player.getBedSpawnLocation() == null) {
-            player.teleportAsync(locationSelector.getRandomPredefinedLocation());
+            player.teleportAsync(LocationSelector.getRandomPredefinedLocation());
         }
 
-        final ItemStack deathCompass = deathCompassCreator.create();
+        final ItemStack deathCompass = DeathCompass.getDeathCompass();
 
         final Inventory playerInventory = player.getInventory();
         playerInventory.addItem(deathCompass);

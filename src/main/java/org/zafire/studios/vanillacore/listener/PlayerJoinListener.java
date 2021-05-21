@@ -6,19 +6,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.zafire.studios.vanillacore.util.MessageParser;
-import org.zafire.studios.vanillacore.util.PredefinedLocationSelector;
+import org.zafire.studios.vanillacore.util.LocationSelector;
 
 import net.kyori.adventure.text.TextComponent;
 
 public final class PlayerJoinListener implements Listener {
-
-    private final MessageParser messageParser;
-    private final PredefinedLocationSelector locationSelector;
-
-    public PlayerJoinListener(final MessageParser messageParser, final PredefinedLocationSelector locationSelector) {
-        this.messageParser = messageParser;
-        this.locationSelector = locationSelector;
-    }
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerJoin(final PlayerJoinEvent event) {
@@ -27,7 +19,7 @@ public final class PlayerJoinListener implements Listener {
 
         if (!player.hasPlayedBefore()) {
             if (!player.hasPermission("sulphur.donator")) {
-                final TextComponent newPlayer = messageParser.parse(
+                final TextComponent newPlayer = MessageParser.parse(
                         "&5&lZafire &8|| &7El usuario &6" + player.getName()
                                 + " &7ha entrado por primera vez al servidor &8(&6#%server_unique_joins%&8)&7.",
                         player);
@@ -35,12 +27,12 @@ public final class PlayerJoinListener implements Listener {
                 event.joinMessage(newPlayer);
             }
 
-            final Location location = locationSelector.getRandomPredefinedLocation();
+            final Location location = LocationSelector.getRandomPredefinedLocation();
             player.teleportAsync(location);
         }
 
         if (player.hasPermission("sulphur.donator") && player.hasPlayedBefore()) {
-            final TextComponent donatorPlayer = messageParser
+            final TextComponent donatorPlayer = MessageParser
                     .parse("&5&lZafire &8|| &7El usuario &6" + player.getName() + " &7ha entrado al servidor.", player);
 
             event.joinMessage(donatorPlayer);
