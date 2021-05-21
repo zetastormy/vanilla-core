@@ -27,7 +27,7 @@ public final class PlayerDropItemListener implements Listener {
         this.messageParser = messageParser;
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerDropItem(final PlayerDropItemEvent event) {
         final Player player = event.getPlayer();
 

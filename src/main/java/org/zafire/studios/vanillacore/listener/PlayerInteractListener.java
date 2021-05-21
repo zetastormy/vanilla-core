@@ -16,7 +16,7 @@ public final class PlayerInteractListener implements Listener {
         this.uuidCache = uuidCache;
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlayerInteract(final PlayerInteractEvent event) {
         final Player player = event.getPlayer();
 

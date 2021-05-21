@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.zafire.studios.vanillacore.util.cache.GenericCache;
 
@@ -21,7 +22,7 @@ public final class InventoryClickListener implements Listener {
         this.uuidCache = uuidCache;
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onInventoryClick(final InventoryClickEvent event) {
         final Player player = (Player) event.getWhoClicked();
 
@@ -34,9 +35,9 @@ public final class InventoryClickListener implements Listener {
             event.setCancelled(true);
         }
 
-        final InventoryType inventoryType = event.getClickedInventory().getType();
+        final Inventory inventory = event.getClickedInventory();
 
-        if (inventoryType != InventoryType.PLAYER) {
+        if (inventory.getType() != InventoryType.PLAYER) {
             final ItemStack currentItem = event.getCurrentItem();
             final net.minecraft.server.v1_16_R3.ItemStack currentItemNms = CraftItemStack.asNMSCopy(currentItem);
 

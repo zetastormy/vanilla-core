@@ -33,7 +33,7 @@ public final class PlayerRespawnListener implements Listener {
         this.deathCompassCreator = deathCompassCreator;
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlayerRespawn(final PlayerRespawnEvent event) {
         final Player player = event.getPlayer();
 

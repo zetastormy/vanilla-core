@@ -18,7 +18,7 @@ public final class PlayerDeathListener implements Listener {
         this.deathCache = deathCache;
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlayerDeath(final PlayerDeathEvent event) {
         final Player player = event.getEntity();
 

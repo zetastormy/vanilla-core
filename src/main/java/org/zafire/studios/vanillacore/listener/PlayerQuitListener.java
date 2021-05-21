@@ -16,7 +16,7 @@ public final class PlayerQuitListener implements Listener {
         this.uuidCache = uuidCache;
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlayerQuit(final PlayerQuitEvent event) {
         final Player player = event.getPlayer();
         event.quitMessage(null);

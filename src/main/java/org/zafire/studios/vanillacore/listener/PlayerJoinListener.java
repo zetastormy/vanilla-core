@@ -20,7 +20,7 @@ public final class PlayerJoinListener implements Listener {
         this.locationSelector = locationSelector;
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlayerJoin(final PlayerJoinEvent event) {
         final Player player = event.getPlayer();
         event.joinMessage(null);
