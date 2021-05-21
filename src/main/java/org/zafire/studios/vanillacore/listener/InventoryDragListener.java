@@ -14,7 +14,7 @@ public class InventoryDragListener implements Listener {
     public void onInventoryDrag(final InventoryDragEvent event) {
         final ItemStack oldItem = event.getOldCursor();
         final net.minecraft.server.v1_16_R3.ItemStack oldItemNms = CraftItemStack.asNMSCopy(oldItem);
-        final NBTTagCompound oldItemCompound = oldItemNms.getTag();
+        final NBTTagCompound oldItemCompound = (oldItemNms.hasTag() ? oldItemNms.getTag() : new NBTTagCompound());
 
         if (oldItemCompound.getByte("deathCompass") == 1) {
             event.getRawSlots().stream().filter(slot -> slot < event.getInventory().getSize())

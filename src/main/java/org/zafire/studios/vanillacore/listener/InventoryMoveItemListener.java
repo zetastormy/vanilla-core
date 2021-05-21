@@ -14,7 +14,7 @@ public class InventoryMoveItemListener implements Listener {
     public void onInventoryMoveItem(final InventoryMoveItemEvent event) {
         final ItemStack itemMoved = event.getItem();
         final net.minecraft.server.v1_16_R3.ItemStack itemMovedNms = CraftItemStack.asNMSCopy(itemMoved);
-        final NBTTagCompound itemMovedCompound = itemMovedNms.getTag();
+        final NBTTagCompound itemMovedCompound = (itemMovedNms.hasTag() ? itemMovedNms.getTag() : new NBTTagCompound());
 
         if (itemMovedCompound.getByte("deathCompass") == 1) {
             event.setCancelled(true);

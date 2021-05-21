@@ -30,6 +30,7 @@ public final class PlayerDeathListener implements Listener {
 
         deathCache.add(playerUuid, deathLocation);
 
-        event.getDrops().removeIf(item -> CraftItemStack.asNMSCopy(item).getTag().getByte("deathCompass") == 1);
+        event.getDrops().removeIf(item -> CraftItemStack.asNMSCopy(item).hasTag()
+                && CraftItemStack.asNMSCopy(item).getTag().getByte("deathCompass") == 1);
     }
 }

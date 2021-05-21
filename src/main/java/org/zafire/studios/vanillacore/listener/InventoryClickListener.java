@@ -53,8 +53,8 @@ public final class InventoryClickListener implements Listener {
         final net.minecraft.server.v1_16_R3.ItemStack cursorItemNms = CraftItemStack.asNMSCopy(cursorItem);
         final net.minecraft.server.v1_16_R3.ItemStack currentItemNms = CraftItemStack.asNMSCopy(currentItem);
 
-        final NBTTagCompound currentItemCompound = currentItemNms.getTag();
-        final NBTTagCompound cursorItemCompound = cursorItemNms.getTag();
+        final NBTTagCompound currentItemCompound = (currentItemNms.hasTag() ? currentItemNms.getTag() : new NBTTagCompound());
+        final NBTTagCompound cursorItemCompound = (cursorItemNms.hasTag() ? cursorItemNms.getTag() : new NBTTagCompound());
 
         if (action.equals(InventoryAction.MOVE_TO_OTHER_INVENTORY)) {
             if (currentItemCompound.getByte("deathCompass") == 1) {
@@ -78,12 +78,16 @@ public final class InventoryClickListener implements Listener {
             }
         }
 
+        if (action.equals(InventoryAction.HOTBAR_SWAP)) {
+
+        }
+
         if (action.equals(InventoryAction.PLACE_ONE) || action.equals(InventoryAction.PLACE_SOME)
                 || action.equals(InventoryAction.PLACE_ALL)) {
 
             if (cursorItemCompound.getByte("deathCompass") == 1 && event.getRawSlot() < inventory.getSize()) {
                 event.setCancelled(true);
             }
-        }
+        }   
     }
 }
