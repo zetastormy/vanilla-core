@@ -78,9 +78,9 @@ public final class VanillaCorePlugin extends JavaPlugin {
     }
 
     private void registerListeners() {
-        pluginManager.registerEvents(new InventoryClickListener(uuidCache, deathCompassCreator), this);
-        pluginManager.registerEvents(new PlayerDeathListener(deathCache, deathCompassCreator), this);
-        pluginManager.registerEvents(new PlayerDropItemListener(uuidCache, deathCompassCreator, messageParser), this);
+        pluginManager.registerEvents(new InventoryClickListener(uuidCache), this);
+        pluginManager.registerEvents(new PlayerDeathListener(deathCache), this);
+        pluginManager.registerEvents(new PlayerDropItemListener(uuidCache, messageParser), this);
         pluginManager.registerEvents(new PlayerInteractListener(uuidCache), this);
         pluginManager.registerEvents(new PlayerJoinListener(messageParser, locationSelector), this);
         pluginManager.registerEvents(new PlayerQuitListener(uuidCache), this);

@@ -4,7 +4,7 @@
 
   <groupId>org.zafire.studios</groupId>
   <artifactId>vanilla-core</artifactId>
-  <version>1.4.1</version>
+  <version>1.4.2</version>
 
   <name>VanillaCore</name>
   <description>The Zafire Network core plugin for Survival Vanilla mode.</description>
@@ -22,8 +22,8 @@
       <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
     </repository>
     <repository>
-      <id>papermc</id>
-      <url>https://papermc.io/repo/repository/maven-public/</url>
+      <id>codemc-repo</id>
+      <url>https://repo.codemc.io/repository/nms/</url>
     </repository>
   </repositories>
 
@@ -36,7 +36,7 @@
     </dependency>
     <dependency>
       <groupId>com.destroystokyo.paper</groupId>
-      <artifactId>paper-api</artifactId>
+      <artifactId>paper</artifactId>
       <version>1.16.5-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
@@ -56,6 +56,7 @@
 
   <build>
     <finalName>${project.name}</finalName>
+    <defaultGoal>clean package</defaultGoal>
     <resources>
       <resource>
         <directory>${project.basedir}/src/main/resources</directory>

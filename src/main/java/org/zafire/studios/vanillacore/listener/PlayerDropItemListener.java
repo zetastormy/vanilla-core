@@ -2,28 +2,28 @@ package org.zafire.studios.vanillacore.listener;
 
 import java.util.UUID;
 
-import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
-import org.zafire.studios.vanillacore.util.DeathCompassCreator;
 import org.zafire.studios.vanillacore.util.MessageParser;
 import org.zafire.studios.vanillacore.util.cache.GenericCache;
 
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.TextComponent;
+import net.minecraft.server.v1_16_R3.NBTTagCompound;
 
 public final class PlayerDropItemListener implements Listener {
 
     private final GenericCache<UUID> uuidCache;
-    private final DeathCompassCreator deathCompassCreator;
     private final MessageParser messageParser;
 
-    public PlayerDropItemListener(final GenericCache<UUID> uuidCache, final DeathCompassCreator deathCompassCreator, final MessageParser messageParser) {
+    public PlayerDropItemListener(final GenericCache<UUID> uuidCache, final MessageParser messageParser) {
         this.uuidCache = uuidCache;
-        this.deathCompassCreator = deathCompassCreator;
         this.messageParser = messageParser;
     }
 
@@ -40,13 +40,18 @@ public final class PlayerDropItemListener implements Listener {
             event.setCancelled(true);
         }
 
-        final ItemStack deathCompass = deathCompassCreator.create();
         final ItemStack itemDropped = event.getItemDrop().getItemStack();
+        final net.minecraft.server.v1_16_R3.ItemStack itemDroppedNms = CraftItemStack.asNMSCopy(itemDropped);
+        final NBTTagCompound itemDroppedCompound = itemDroppedNms.getTag();
 
-        if (itemDropped.isSimilar(deathCompass)) {
-            event.setCancelled(true);
-            itemDropped.setType(Material.AIR);
-            final TextComponent destroyMessage = messageParser.parse("&2&lSurvival &8|| &7Has tirado tu buscadora de catacumbas, y esta al perder el enlace contigo fue destruida.", player);
+        if (itemDroppedCompound.getByte("deathCompass") == 1) {
+            event.getItemDrop().remove();
+
+            final Sound sound = Sound.sound(Key.key("entity.item.break"), Sound.Source.NEUTRAL, 2, 0);
+            player.playSound(sound);
+
+            final TextComponent destroyMessage = messageParser
+                    .parse("&2&lSurvival &8|| &7Tu buscadora de catacumbas ha sido destruida.", player);
             player.sendMessage(destroyMessage);
         }
     }
