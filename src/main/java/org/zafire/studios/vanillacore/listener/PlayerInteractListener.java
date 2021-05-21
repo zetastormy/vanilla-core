@@ -19,10 +19,6 @@ public final class PlayerInteractListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onPlayerInteract(final PlayerInteractEvent event) {
         final Player player = event.getPlayer();
-
-        if (player == null)
-            return;
-
         final UUID playerUuid = player.getUniqueId();
 
         if (uuidCache.isCached(playerUuid)) {

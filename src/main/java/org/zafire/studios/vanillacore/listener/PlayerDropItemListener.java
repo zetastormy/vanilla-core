@@ -30,10 +30,6 @@ public final class PlayerDropItemListener implements Listener {
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerDropItem(final PlayerDropItemEvent event) {
         final Player player = event.getPlayer();
-
-        if (player == null)
-            return;
-
         final UUID playerUuid = player.getUniqueId();
 
         if (uuidCache.isCached(playerUuid)) {

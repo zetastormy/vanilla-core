@@ -33,10 +33,6 @@ public final class InventoryClickListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onInventoryClick(final InventoryClickEvent event) {
         final Player player = (Player) event.getWhoClicked();
-
-        if (player == null)
-            return;
-
         final UUID playerUuid = player.getUniqueId();
 
         if (uuidCache.isCached(playerUuid)) {
