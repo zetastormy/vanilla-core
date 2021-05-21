@@ -20,7 +20,7 @@ public final class PlayerQuitListener implements Listener {
     public void onPlayerQuit(final PlayerQuitEvent event) {
         final Player player = event.getPlayer();
         event.quitMessage(null);
-        
+
         final UUID playerUuid = player.getUniqueId();
 
         if (uuidCache.isCached(playerUuid)) {

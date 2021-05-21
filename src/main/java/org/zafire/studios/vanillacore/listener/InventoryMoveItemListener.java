@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import net.minecraft.server.v1_16_R3.NBTTagCompound;
 
 public class InventoryMoveItemListener implements Listener {
-    
+
     @EventHandler(ignoreCancelled = true)
     public void onInventoryMoveItem(final InventoryMoveItemEvent event) {
         final ItemStack itemMoved = event.getItem();

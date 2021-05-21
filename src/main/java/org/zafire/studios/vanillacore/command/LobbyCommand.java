@@ -22,7 +22,8 @@ public final class LobbyCommand implements CommandExecutor {
     private final GenericCache<UUID> uuidCache;
     private final BukkitScheduler scheduler;
 
-    public LobbyCommand(final VanillaCorePlugin plugin, final GenericCache<UUID> uuidCache, final BukkitScheduler scheduler) {
+    public LobbyCommand(final VanillaCorePlugin plugin, final GenericCache<UUID> uuidCache,
+            final BukkitScheduler scheduler) {
         this.plugin = plugin;
         this.uuidCache = uuidCache;
         this.scheduler = scheduler;

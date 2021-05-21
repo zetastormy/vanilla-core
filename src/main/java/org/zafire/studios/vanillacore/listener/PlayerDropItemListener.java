@@ -36,7 +36,8 @@ public final class PlayerDropItemListener implements Listener {
 
         final ItemStack itemDropped = event.getItemDrop().getItemStack();
         final net.minecraft.server.v1_16_R3.ItemStack itemDroppedNms = CraftItemStack.asNMSCopy(itemDropped);
-        final NBTTagCompound itemDroppedCompound = (itemDroppedNms.hasTag() ? itemDroppedNms.getTag() : new NBTTagCompound());
+        final NBTTagCompound itemDroppedCompound = (itemDroppedNms.hasTag() ? itemDroppedNms.getTag()
+                : new NBTTagCompound());
 
         if (itemDroppedCompound.getByte("deathCompass") == 1) {
             event.getItemDrop().remove();
