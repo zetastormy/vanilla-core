@@ -4,7 +4,7 @@
 
   <groupId>org.zafire.studios</groupId>
   <artifactId>vanilla-core</artifactId>
-  <version>1.4.9</version>
+  <version>1.4.10</version>
 
   <name>VanillaCore</name>
   <description>The Zafire Network core plugin for Survival Vanilla mode.</description>
