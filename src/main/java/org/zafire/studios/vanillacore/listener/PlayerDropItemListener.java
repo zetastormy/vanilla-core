@@ -2,20 +2,19 @@ package org.zafire.studios.vanillacore.listener;
 
 import java.util.UUID;
 
-import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.zafire.studios.vanillacore.util.DeathCompassManager;
 import org.zafire.studios.vanillacore.util.MessageParser;
 import org.zafire.studios.vanillacore.util.cache.GenericCache;
 
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.TextComponent;
-import net.minecraft.server.v1_16_R3.NBTTagCompound;
 
 public final class PlayerDropItemListener implements Listener {
 
@@ -35,11 +34,8 @@ public final class PlayerDropItemListener implements Listener {
         }
 
         final ItemStack itemDropped = event.getItemDrop().getItemStack();
-        final net.minecraft.server.v1_16_R3.ItemStack itemDroppedNms = CraftItemStack.asNMSCopy(itemDropped);
-        final NBTTagCompound itemDroppedCompound = (itemDroppedNms.hasTag() ? itemDroppedNms.getTag()
-                : new NBTTagCompound());
 
-        if (itemDroppedCompound.getByte("deathCompass") == 1) {
+        if (DeathCompassManager.isDeathCompass(itemDropped)) {
             event.getItemDrop().remove();
 
             final Sound sound = Sound.sound(Key.key("entity.item.break"), Sound.Source.NEUTRAL, 2, 0);

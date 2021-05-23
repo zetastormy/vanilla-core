@@ -14,7 +14,7 @@ import net.kyori.adventure.text.TextComponent;
 import net.minecraft.server.v1_16_R3.NBTTagByte;
 import net.minecraft.server.v1_16_R3.NBTTagCompound;
 
-public final class DeathCompass {
+public final class DeathCompassManager {
 
     private final static ItemStack DEATH_COMPASS;
 
@@ -49,6 +49,13 @@ public final class DeathCompass {
         deathCompassNms.setTag(deathCompassCompound);
 
         return deathCompassNms;
+    }
+
+    public static boolean isDeathCompass(final ItemStack item) {
+        final net.minecraft.server.v1_16_R3.ItemStack itemNms = CraftItemStack.asNMSCopy(item);
+        final NBTTagCompound itemCompound = (itemNms.hasTag() ? itemNms.getTag() : new NBTTagCompound());
+
+        return itemCompound.getByte("deathCompass") == 1;
     }
 
     public static ItemStack getDeathCompass() {

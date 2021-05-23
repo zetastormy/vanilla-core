@@ -11,7 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.VanillaCorePlugin;
-import org.zafire.studios.vanillacore.util.DeathCompass;
+import org.zafire.studios.vanillacore.util.DeathCompassManager;
 import org.zafire.studios.vanillacore.util.LocationSelector;
 import org.zafire.studios.vanillacore.util.cache.DeathCache;
 
@@ -36,7 +36,7 @@ public final class PlayerRespawnListener implements Listener {
             player.teleportAsync(LocationSelector.getRandomPredefinedLocation());
         }
 
-        final ItemStack deathCompass = DeathCompass.getDeathCompass();
+        final ItemStack deathCompass = DeathCompassManager.getDeathCompass();
 
         final Inventory playerInventory = player.getInventory();
         playerInventory.addItem(deathCompass);
