@@ -32,7 +32,8 @@ public final class InventoryClickListener implements Listener {
         final InventoryAction action = event.getAction();
         final ClickType clickType = event.getClick();
 
-        if ((action.equals(InventoryAction.PLACE_ALL) || action.equals(InventoryAction.MOVE_TO_OTHER_INVENTORY))
+        if ((action.equals(InventoryAction.PLACE_SOME) || action.equals(InventoryAction.PLACE_ONE)
+                || action.equals(InventoryAction.PLACE_ALL) || action.equals(InventoryAction.SWAP_WITH_CURSOR))
                 && event.getRawSlot() < event.getInventory().getSize()) {
             final ItemStack cursorItem = event.getCursor();
 
