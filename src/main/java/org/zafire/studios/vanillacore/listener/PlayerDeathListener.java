@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.zafire.studios.vanillacore.util.DeathCompassManager;
+import org.zafire.studios.vanillacore.util.DeathCompassHelper;
 import org.zafire.studios.vanillacore.util.cache.DeathCache;
 
 public final class PlayerDeathListener implements Listener {
@@ -26,6 +26,6 @@ public final class PlayerDeathListener implements Listener {
 
         deathCache.add(playerUuid, deathLocation);
 
-        event.getDrops().removeIf(item -> DeathCompassManager.isDeathCompass(item));
+        event.getDrops().removeIf(item -> DeathCompassHelper.isDeathCompass(item));
     }
 }

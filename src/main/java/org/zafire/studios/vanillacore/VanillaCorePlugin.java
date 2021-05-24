@@ -2,7 +2,6 @@ package org.zafire.studios.vanillacore;
 
 import java.io.File;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -28,8 +27,6 @@ import org.zafire.studios.vanillacore.util.cache.GenericCache;
 
 public final class VanillaCorePlugin extends JavaPlugin {
 
-    private Logger logger;
-    private Server server;
     private PluginManager pluginManager;
     private GenericCache<UUID> uuidCache;
     private DeathCache deathCache;
@@ -60,14 +57,12 @@ public final class VanillaCorePlugin extends JavaPlugin {
     }
 
     private void setInstances() {
-        logger = getLogger();
-        server = getServer();
+        final Server server = getServer();
         pluginManager = server.getPluginManager();
         uuidCache = new GenericCache<>();
         deathCache = new DeathCache();
         scheduler = server.getScheduler();
         messenger = server.getMessenger();
-        logger.info("The object instances have been set!");
     }
 
     private void registerListeners() {
@@ -80,22 +75,18 @@ public final class VanillaCorePlugin extends JavaPlugin {
         pluginManager.registerEvents(new PlayerJoinListener(), this);
         pluginManager.registerEvents(new PlayerQuitListener(uuidCache), this);
         pluginManager.registerEvents(new PlayerRespawnListener(this, deathCache, scheduler), this);
-        logger.info("The listeners have been registered!");
     }
 
     private void registerCommands() {
         getCommand("lobby").setExecutor(new LobbyCommand(this, uuidCache, scheduler));
-        logger.info("The command executors have been set!");
     }
 
     private void scheduleTasks() {
         new AnnounceTask(this, scheduler);
         new CoordinatesTask(this, scheduler);
-        logger.info("The tasks have been scheduled!");
     }
 
     private void registerChannels() {
         messenger.registerOutgoingPluginChannel(this, "BungeeCord");
-        logger.info("The channels have been registered!");
     }
 }

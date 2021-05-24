@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-public final class LocationSelector {
+public final class LocationSupplier {
 
     private static final List<Location> LOCATIONS;
 

@@ -4,7 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.inventory.ItemStack;
-import org.zafire.studios.vanillacore.util.DeathCompassManager;
+import org.zafire.studios.vanillacore.util.DeathCompassHelper;
 
 public class InventoryMoveItemListener implements Listener {
 
@@ -12,7 +12,7 @@ public class InventoryMoveItemListener implements Listener {
     public void onInventoryMoveItem(final InventoryMoveItemEvent event) {
         final ItemStack itemMoved = event.getItem();
 
-        if (DeathCompassManager.isDeathCompass(itemMoved)) {
+        if (DeathCompassHelper.isDeathCompass(itemMoved)) {
             event.setCancelled(true);
         }
     }

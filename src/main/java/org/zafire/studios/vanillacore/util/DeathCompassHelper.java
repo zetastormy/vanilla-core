@@ -14,7 +14,7 @@ import net.kyori.adventure.text.TextComponent;
 import net.minecraft.server.v1_16_R3.NBTTagByte;
 import net.minecraft.server.v1_16_R3.NBTTagCompound;
 
-public final class DeathCompassManager {
+public final class DeathCompassHelper {
 
     private final static ItemStack DEATH_COMPASS;
 

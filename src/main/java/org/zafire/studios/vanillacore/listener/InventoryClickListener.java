@@ -8,8 +8,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.zafire.studios.vanillacore.util.DeathCompassManager;
+import org.zafire.studios.vanillacore.util.DeathCompassHelper;
 import org.zafire.studios.vanillacore.util.cache.GenericCache;
 
 public final class InventoryClickListener implements Listener {
@@ -29,35 +30,33 @@ public final class InventoryClickListener implements Listener {
             event.setCancelled(true);
         }
 
+        final Inventory inventory = event.getInventory();
         final InventoryAction action = event.getAction();
         final ClickType clickType = event.getClick();
 
-        if ((action.equals(InventoryAction.PLACE_SOME) || action.equals(InventoryAction.PLACE_ONE)
-                || action.equals(InventoryAction.PLACE_ALL) || action.equals(InventoryAction.SWAP_WITH_CURSOR))
-                && event.getRawSlot() < event.getInventory().getSize()) {
-            final ItemStack cursorItem = event.getCursor();
+        final boolean isTopInventory = event.getRawSlot() < inventory.getSize();
+        final boolean isPlaceAction = action.equals(InventoryAction.PLACE_SOME)
+                || action.equals(InventoryAction.PLACE_ONE) || action.equals(InventoryAction.PLACE_ALL);
 
-            if (DeathCompassManager.isDeathCompass(cursorItem)) {
-                event.setCancelled(true);
-                return;
-            }
+        if ((isPlaceAction || action.equals(InventoryAction.SWAP_WITH_CURSOR)) && isTopInventory) {
+            final ItemStack cursorItem = event.getCursor();
+            cancelIfDeathCompass(event, cursorItem);
         }
 
         if (action.equals(InventoryAction.MOVE_TO_OTHER_INVENTORY) && event.isShiftClick()) {
             final ItemStack currentItem = event.getCurrentItem();
-
-            if (DeathCompassManager.isDeathCompass(currentItem)) {
-                event.setCancelled(true);
-                return;
-            }
+            cancelIfDeathCompass(event, currentItem);
         }
 
-        if (clickType == ClickType.NUMBER_KEY && event.getRawSlot() < event.getInventory().getSize()) {
+        if (clickType == ClickType.NUMBER_KEY && isTopInventory) {
             final ItemStack itemSwapped = player.getInventory().getItem(event.getHotbarButton());
+            cancelIfDeathCompass(event, itemSwapped);
+        }
+    }
 
-            if (DeathCompassManager.isDeathCompass(itemSwapped)) {
-                event.setCancelled(true);
-            }
+    private void cancelIfDeathCompass(final InventoryClickEvent event, final ItemStack item) {
+        if (DeathCompassHelper.isDeathCompass(item)) {
+            event.setCancelled(true);
         }
     }
 }

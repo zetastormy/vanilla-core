@@ -8,7 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
-import org.zafire.studios.vanillacore.util.DeathCompassManager;
+import org.zafire.studios.vanillacore.util.DeathCompassHelper;
 import org.zafire.studios.vanillacore.util.MessageParser;
 import org.zafire.studios.vanillacore.util.cache.GenericCache;
 
@@ -35,7 +35,7 @@ public final class PlayerDropItemListener implements Listener {
 
         final ItemStack itemDropped = event.getItemDrop().getItemStack();
 
-        if (DeathCompassManager.isDeathCompass(itemDropped)) {
+        if (DeathCompassHelper.isDeathCompass(itemDropped)) {
             event.getItemDrop().remove();
 
             final Sound sound = Sound.sound(Key.key("entity.item.break"), Sound.Source.NEUTRAL, 2, 0);

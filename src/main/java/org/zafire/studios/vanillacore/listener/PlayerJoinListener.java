@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.zafire.studios.vanillacore.util.MessageParser;
-import org.zafire.studios.vanillacore.util.LocationSelector;
+import org.zafire.studios.vanillacore.util.LocationSupplier;
 
 import net.kyori.adventure.text.TextComponent;
 
@@ -27,7 +27,7 @@ public final class PlayerJoinListener implements Listener {
                 event.joinMessage(newPlayer);
             }
 
-            final Location location = LocationSelector.getRandomPredefinedLocation();
+            final Location location = LocationSupplier.getRandomPredefinedLocation();
             player.teleportAsync(location);
         }
 
