@@ -16,49 +16,49 @@ import org.zafire.studios.vanillacore.util.cache.GenericCache;
 
 import net.kyori.adventure.text.TextComponent;
 
-public final class LobbyCommand implements CommandExecutor {
+public class LobbyCommand implements CommandExecutor {
 
     private final VanillaCorePlugin plugin;
     private final GenericCache<UUID> uuidCache;
     private final BukkitScheduler scheduler;
 
-    public LobbyCommand(final VanillaCorePlugin plugin, final GenericCache<UUID> uuidCache,
-            final BukkitScheduler scheduler) {
+    public LobbyCommand(VanillaCorePlugin plugin, GenericCache<UUID> uuidCache,
+            BukkitScheduler scheduler) {
         this.plugin = plugin;
         this.uuidCache = uuidCache;
         this.scheduler = scheduler;
     }
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String label,
-            final String[] args) {
-        if (sender instanceof Player) {
-            final Player player = (Player) sender;
-            final UUID playerUuid = player.getUniqueId();
-            uuidCache.add(playerUuid);
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        
+        if (!sender instanceof Player) {
+            return false;
+        }
+        
+        Player player = (Player) sender;
+        UUID playerUuid = player.getUniqueId();
+        uuidCache.add(playerUuid);
 
-            scheduler.runTaskLater(plugin, () -> uuidCache.remove(playerUuid), 4000L);
+        scheduler.runTaskLater(plugin, () -> uuidCache.remove(playerUuid), 4000L);
 
-            player.saveData();
+        player.saveData();
 
-            final TextComponent successMessage = MessageParser
+        TextComponent successMessage = MessageParser
                     .parse("&5&lZafire &8|| &7Teletransportándote al &6Lobby&7, por favor, espera.", player);
-            player.sendMessage(successMessage);
+        player.sendMessage(successMessage);
 
-            final ByteArrayOutputStream byteArrayOutput = new ByteArrayOutputStream();
-            final DataOutputStream dataOutput = new DataOutputStream(byteArrayOutput);
+        ByteArrayOutputStream byteArrayOutput = new ByteArrayOutputStream();
+        DataOutputStream dataOutput = new DataOutputStream(byteArrayOutput);
 
-            try {
-                dataOutput.writeUTF("Connect");
-                dataOutput.writeUTF("Lobby");
-            } catch (final IOException e) {
-                e.printStackTrace();
-            }
-
-            player.sendPluginMessage(plugin, "BungeeCord", byteArrayOutput.toByteArray());
-            return true;
+        try {
+            dataOutput.writeUTF("Connect");
+            dataOutput.writeUTF("Lobby");
+        } catch (final IOException e) {
+            e.printStackTrace();
         }
 
+        player.sendPluginMessage(plugin, "BungeeCord", byteArrayOutput.toByteArray());
         return false;
     }
 }
