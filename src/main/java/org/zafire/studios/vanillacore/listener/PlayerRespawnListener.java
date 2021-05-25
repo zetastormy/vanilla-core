@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.util.DeathCompassHelper;
-import org.zafire.studios.vanillacore.util.LocationSupplier;
+import org.zafire.studios.vanillacore.util.PredefinedLocationHelper;
 import org.zafire.studios.vanillacore.util.cache.DeathCache;
 
 public final class PlayerRespawnListener implements Listener {
@@ -32,7 +32,7 @@ public final class PlayerRespawnListener implements Listener {
         final Player player = event.getPlayer();
 
         if (player.getBedSpawnLocation() == null) {
-            player.teleportAsync(LocationSupplier.getRandomPredefinedLocation());
+            player.teleportAsync(PredefinedLocationHelper.getRandomPredefinedLocation());
         }
 
         final ItemStack deathCompass = DeathCompassHelper.getDeathCompass();

@@ -72,7 +72,7 @@ public final class VanillaCorePlugin extends JavaPlugin {
         pluginManager.registerEvents(new PlayerDeathListener(deathCache), this);
         pluginManager.registerEvents(new PlayerDropItemListener(uuidCache), this);
         pluginManager.registerEvents(new PlayerInteractListener(uuidCache), this);
-        pluginManager.registerEvents(new PlayerJoinListener(), this);
+        pluginManager.registerEvents(new PlayerJoinListener(this, scheduler), this);
         pluginManager.registerEvents(new PlayerQuitListener(uuidCache), this);
         pluginManager.registerEvents(new PlayerRespawnListener(this, deathCache, scheduler), this);
     }

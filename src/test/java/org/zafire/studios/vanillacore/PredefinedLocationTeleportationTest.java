@@ -7,7 +7,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.zafire.studios.vanillacore.util.LocationSupplier;
+import org.zafire.studios.vanillacore.util.PredefinedLocationHelper;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -28,7 +28,7 @@ public class PredefinedLocationTeleportationTest {
 
     @Test
     public void testTeleportationToRandomPredefinedLocation() {
-        Location location = LocationSupplier.getRandomPredefinedLocation();
+        Location location = PredefinedLocationHelper.getRandomPredefinedLocation();
         location.setWorld(world);
         assertTrue(player.teleport(location), "Player teleportation failed!");
         player.assertLocation(location, 10);
