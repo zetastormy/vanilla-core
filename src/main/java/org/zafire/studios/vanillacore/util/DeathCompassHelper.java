@@ -19,18 +19,19 @@ public final class DeathCompassHelper {
     private final static ItemStack DEATH_COMPASS;
 
     static {
-        final ItemStack compass = new ItemStack(Material.COMPASS);
+        ItemStack compass = new ItemStack(Material.COMPASS);
         compass.setItemMeta(applyDeathCompassMeta(compass));
+
         DEATH_COMPASS = CraftItemStack.asBukkitCopy(applyDeathCompassTag(compass));
     }
 
     private static ItemMeta applyDeathCompassMeta(final ItemStack deathCompass) {
-        final CompassMeta deathCompassMeta = (CompassMeta) deathCompass.getItemMeta();
+        CompassMeta deathCompassMeta = (CompassMeta) deathCompass.getItemMeta();
 
-        final TextComponent deathCompassName = MessageParser.parse("&cBuscadora de catacumbas");
+        TextComponent deathCompassName = MessageParser.parse("&cBuscadora de catacumbas");
 
-        final List<Component> deathCompassLore = new ArrayList<>();
-        final TextComponent loreFirst = MessageParser.parse("&8» &7Esta brújula apunta a tu lugar de muerte.");
+        List<Component> deathCompassLore = new ArrayList<>();
+        TextComponent loreFirst = MessageParser.parse("&8» &7Esta brújula apunta a tu lugar de muerte.");
         deathCompassLore.add(loreFirst);
 
         deathCompassMeta.displayName(deathCompassName);
@@ -40,9 +41,9 @@ public final class DeathCompassHelper {
     }
 
     private static net.minecraft.server.v1_16_R3.ItemStack applyDeathCompassTag(final ItemStack deathCompass) {
-        final net.minecraft.server.v1_16_R3.ItemStack deathCompassNms = CraftItemStack.asNMSCopy(deathCompass);
+        net.minecraft.server.v1_16_R3.ItemStack deathCompassNms = CraftItemStack.asNMSCopy(deathCompass);
 
-        final NBTTagCompound deathCompassCompound = (deathCompassNms.hasTag() ? deathCompassNms.getTag()
+        NBTTagCompound deathCompassCompound = (deathCompassNms.hasTag() ? deathCompassNms.getTag()
                 : new NBTTagCompound());
         deathCompassCompound.set("deathCompass", NBTTagByte.a((byte) 1));
 
@@ -52,8 +53,8 @@ public final class DeathCompassHelper {
     }
 
     public static boolean isDeathCompass(final ItemStack item) {
-        final net.minecraft.server.v1_16_R3.ItemStack itemNms = CraftItemStack.asNMSCopy(item);
-        final NBTTagCompound itemCompound = (itemNms.hasTag() ? itemNms.getTag() : new NBTTagCompound());
+        net.minecraft.server.v1_16_R3.ItemStack itemNms = CraftItemStack.asNMSCopy(item);
+        NBTTagCompound itemCompound = (itemNms.hasTag() ? itemNms.getTag() : new NBTTagCompound());
 
         return itemCompound.getByte("deathCompass") == 1;
     }

@@ -26,22 +26,22 @@ public final class PlayerDropItemListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerDropItem(final PlayerDropItemEvent event) {
-        final Player player = event.getPlayer();
-        final UUID playerUuid = player.getUniqueId();
+        Player player = event.getPlayer();
+        UUID playerUuid = player.getUniqueId();
 
         if (uuidCache.isCached(playerUuid)) {
             event.setCancelled(true);
         }
 
-        final ItemStack itemDropped = event.getItemDrop().getItemStack();
+        ItemStack itemDropped = event.getItemDrop().getItemStack();
 
         if (DeathCompassHelper.isDeathCompass(itemDropped)) {
             event.getItemDrop().remove();
 
-            final Sound sound = Sound.sound(Key.key("entity.item.break"), Sound.Source.NEUTRAL, 2, 0);
+            Sound sound = Sound.sound(Key.key("entity.item.break"), Sound.Source.NEUTRAL, 2, 0);
             player.playSound(sound);
 
-            final TextComponent destroyMessage = MessageParser
+            TextComponent destroyMessage = MessageParser
                     .parse("&2&lSurvival &8|| &7Tu buscadora de catacumbas ha sido destruida.", player);
             player.sendMessage(destroyMessage);
         }

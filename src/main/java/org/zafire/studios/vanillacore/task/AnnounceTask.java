@@ -24,9 +24,9 @@ public final class AnnounceTask {
 
     public void schedule() {
         scheduler.runTaskTimerAsynchronously(plugin, () -> {
-            final Server server = plugin.getServer();
-            final Random random = new Random();
-            final int randomNumber = random.nextInt(4);
+            Server server = plugin.getServer();
+            Random random = new Random();
+            int randomNumber = random.nextInt(4);
 
             switch (randomNumber) {
                 case 0:
@@ -54,10 +54,10 @@ public final class AnnounceTask {
     }
 
     private void announce(final String rawMessage, final Server server) {
-        final Sound sound = Sound.sound(Key.key("block.note_block.pling"), Sound.Source.BLOCK, 2, 0);
+        Sound sound = Sound.sound(Key.key("block.note_block.pling"), Sound.Source.BLOCK, 2, 0);
         server.playSound(sound);
 
-        final TextComponent announceMessage = MessageParser.parse(rawMessage);
+        TextComponent announceMessage = MessageParser.parse(rawMessage);
         server.sendMessage(announceMessage);
     }
 }

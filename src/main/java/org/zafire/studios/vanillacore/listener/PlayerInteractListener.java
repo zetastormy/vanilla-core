@@ -18,8 +18,8 @@ public final class PlayerInteractListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerInteract(final PlayerInteractEvent event) {
-        final Player player = event.getPlayer();
-        final UUID playerUuid = player.getUniqueId();
+        Player player = event.getPlayer();
+        UUID playerUuid = player.getUniqueId();
 
         if (uuidCache.isCached(playerUuid)) {
             uuidCache.remove(playerUuid);

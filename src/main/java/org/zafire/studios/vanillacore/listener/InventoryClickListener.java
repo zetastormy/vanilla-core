@@ -23,33 +23,33 @@ public final class InventoryClickListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onInventoryClick(final InventoryClickEvent event) {
-        final Player player = (Player) event.getWhoClicked();
-        final UUID playerUuid = player.getUniqueId();
+        Player player = (Player) event.getWhoClicked();
+        UUID playerUuid = player.getUniqueId();
 
         if (uuidCache.isCached(playerUuid)) {
             event.setCancelled(true);
         }
 
-        final Inventory inventory = event.getInventory();
-        final InventoryAction action = event.getAction();
-        final ClickType clickType = event.getClick();
+        Inventory inventory = event.getInventory();
+        InventoryAction action = event.getAction();
+        ClickType clickType = event.getClick();
 
-        final boolean isTopInventory = event.getRawSlot() < inventory.getSize();
-        final boolean isPlaceAction = action.equals(InventoryAction.PLACE_SOME)
-                || action.equals(InventoryAction.PLACE_ONE) || action.equals(InventoryAction.PLACE_ALL);
+        boolean isTopInventory = event.getRawSlot() < inventory.getSize();
+        boolean isPlaceAction = action.equals(InventoryAction.PLACE_SOME) || action.equals(InventoryAction.PLACE_ONE)
+                || action.equals(InventoryAction.PLACE_ALL);
 
         if ((isPlaceAction || action.equals(InventoryAction.SWAP_WITH_CURSOR)) && isTopInventory) {
-            final ItemStack cursorItem = event.getCursor();
+            ItemStack cursorItem = event.getCursor();
             cancelIfDeathCompass(event, cursorItem);
         }
 
         if (action.equals(InventoryAction.MOVE_TO_OTHER_INVENTORY) && event.isShiftClick()) {
-            final ItemStack currentItem = event.getCurrentItem();
+            ItemStack currentItem = event.getCurrentItem();
             cancelIfDeathCompass(event, currentItem);
         }
 
         if (clickType == ClickType.NUMBER_KEY && isTopInventory) {
-            final ItemStack itemSwapped = player.getInventory().getItem(event.getHotbarButton());
+            ItemStack itemSwapped = player.getInventory().getItem(event.getHotbarButton());
             cancelIfDeathCompass(event, itemSwapped);
         }
     }

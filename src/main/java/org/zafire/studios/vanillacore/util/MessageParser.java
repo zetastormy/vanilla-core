@@ -10,7 +10,7 @@ import net.kyori.adventure.text.TextComponent;
 public final class MessageParser {
 
     public static TextComponent parse(final String rawMessage, final Player player) {
-        final String message = sanitize(rawMessage, player);
+        String message = sanitize(rawMessage, player);
         return Component.text(message);
     }
 

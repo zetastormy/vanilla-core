@@ -1,13 +1,10 @@
 package org.zafire.studios.vanillacore;
 
-import java.io.File;
 import java.util.UUID;
 
 import org.bukkit.Server;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.zafire.studios.vanillacore.command.LobbyCommand;
@@ -33,15 +30,6 @@ public final class VanillaCorePlugin extends JavaPlugin {
     private BukkitScheduler scheduler;
     private Messenger messenger;
 
-    public VanillaCorePlugin() {
-        super();
-    }
-
-    protected VanillaCorePlugin(final JavaPluginLoader loader, final PluginDescriptionFile description,
-            final File dataFolder, final File file) {
-        super(loader, description, dataFolder, file);
-    }
-
     @Override
     public void onEnable() {
         setInstances();
@@ -57,7 +45,8 @@ public final class VanillaCorePlugin extends JavaPlugin {
     }
 
     private void setInstances() {
-        final Server server = getServer();
+        Server server = getServer();
+        
         pluginManager = server.getPluginManager();
         uuidCache = new GenericCache<>();
         deathCache = new DeathCache();

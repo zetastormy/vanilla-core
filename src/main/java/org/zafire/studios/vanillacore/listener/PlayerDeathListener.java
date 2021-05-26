@@ -20,9 +20,9 @@ public final class PlayerDeathListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerDeath(final PlayerDeathEvent event) {
-        final Player player = event.getEntity();
-        final UUID playerUuid = player.getUniqueId();
-        final Location deathLocation = player.getLocation();
+        Player player = event.getEntity();
+        UUID playerUuid = player.getUniqueId();
+        Location deathLocation = player.getLocation();
 
         deathCache.add(playerUuid, deathLocation);
 

@@ -16,26 +16,26 @@ import org.zafire.studios.vanillacore.util.cache.GenericCache;
 
 import net.kyori.adventure.text.TextComponent;
 
-public class LobbyCommand implements CommandExecutor {
+public final class LobbyCommand implements CommandExecutor {
 
     private final VanillaCorePlugin plugin;
     private final GenericCache<UUID> uuidCache;
     private final BukkitScheduler scheduler;
 
-    public LobbyCommand(VanillaCorePlugin plugin, GenericCache<UUID> uuidCache,
-            BukkitScheduler scheduler) {
+    public LobbyCommand(final VanillaCorePlugin plugin, final GenericCache<UUID> uuidCache,
+            final BukkitScheduler scheduler) {
         this.plugin = plugin;
         this.uuidCache = uuidCache;
         this.scheduler = scheduler;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        
-        if (!sender instanceof Player) {
+    public boolean onCommand(final CommandSender sender, final Command command, final String label,
+            final String[] args) {
+        if (!(sender instanceof Player)) {
             return false;
         }
-        
+
         Player player = (Player) sender;
         UUID playerUuid = player.getUniqueId();
         uuidCache.add(playerUuid);
@@ -45,7 +45,7 @@ public class LobbyCommand implements CommandExecutor {
         player.saveData();
 
         TextComponent successMessage = MessageParser
-                    .parse("&5&lZafire &8|| &7Teletransportándote al &6Lobby&7, por favor, espera.", player);
+                .parse("&5&lZafire &8|| &7Teletransportándote al &6Lobby&7, por favor, espera.", player);
         player.sendMessage(successMessage);
 
         ByteArrayOutputStream byteArrayOutput = new ByteArrayOutputStream();

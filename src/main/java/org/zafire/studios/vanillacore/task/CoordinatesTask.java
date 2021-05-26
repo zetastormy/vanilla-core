@@ -22,8 +22,9 @@ public final class CoordinatesTask {
     }
 
     public void schedule() {
+        Server server = plugin.getServer();
+
         scheduler.runTaskTimerAsynchronously(plugin, () -> {
-            final Server server = plugin.getServer();
             sendCoordinates(server);
         }, 300L, 40L);
     }
@@ -42,14 +43,7 @@ public final class CoordinatesTask {
         BlockFace playerFacing = player.getFacing();
 
         StringBuilder coordinates = new StringBuilder();
-        coordinates.append((int) playerLocation.getX());
-        coordinates.append(' ');
-        coordinates.append((int) playerLocation.getY());
-        coordinates.append(' ');
-        coordinates.append((int) playerLocation.getZ());
-        coordinates.append(' ');
-        coordinates.append(playerFacing.toString());
-
-        return coordinates;
+        return coordinates.append((int) playerLocation.getX()).append(' ').append((int) playerLocation.getY())
+                .append(' ').append((int) playerLocation.getZ()).append(' ').append(playerFacing.toString());
     }
 }

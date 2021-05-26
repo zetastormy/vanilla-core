@@ -6,11 +6,11 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.ItemStack;
 import org.zafire.studios.vanillacore.util.DeathCompassHelper;
 
-public class InventoryDragListener implements Listener {
+public final class InventoryDragListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onInventoryDrag(final InventoryDragEvent event) {
-        final ItemStack oldItem = event.getOldCursor();
+        ItemStack oldItem = event.getOldCursor();
 
         if (DeathCompassHelper.isDeathCompass(oldItem)) {
             event.getRawSlots().stream().filter(slot -> slot < event.getInventory().getSize())

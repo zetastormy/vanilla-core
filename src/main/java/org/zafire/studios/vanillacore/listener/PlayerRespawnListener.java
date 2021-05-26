@@ -29,19 +29,19 @@ public final class PlayerRespawnListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerRespawn(final PlayerRespawnEvent event) {
-        final Player player = event.getPlayer();
+        Player player = event.getPlayer();
 
         if (player.getBedSpawnLocation() == null) {
             player.teleportAsync(PredefinedLocationHelper.getRandomPredefinedLocation());
         }
 
-        final ItemStack deathCompass = DeathCompassHelper.getDeathCompass();
+        ItemStack deathCompass = DeathCompassHelper.getDeathCompass();
 
-        final Inventory playerInventory = player.getInventory();
+        Inventory playerInventory = player.getInventory();
         playerInventory.addItem(deathCompass);
 
-        final UUID playerUuid = player.getUniqueId();
-        final Location deathLocation = deathCache.get(playerUuid);
+        UUID playerUuid = player.getUniqueId();
+        Location deathLocation = deathCache.get(playerUuid);
 
         scheduler.runTaskLaterAsynchronously(plugin, () -> {
             player.setCompassTarget(deathLocation);
