@@ -26,6 +26,6 @@ public final class PlayerDeathListener implements Listener {
 
         deathCache.add(playerUuid, deathLocation);
 
-        event.getDrops().removeIf(item -> DeathCompassHelper.isDeathCompass(item));
+        event.getDrops().removeIf(DeathCompassHelper::isDeathCompass);
     }
 }
